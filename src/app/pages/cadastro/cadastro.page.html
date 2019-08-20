@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">
+        Nome <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">
+        Sobrenome
+      </ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">
+        CPF <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="stacked">Endereço</ion-label>
+      <ion-input type="text" placeholder="CEP" class="ion-margin-top"></ion-input>
+      <ion-input type="text" placeholder="Logradouro"></ion-input>
+      <ion-input type="text" placeholder="Número"></ion-input>
+      <ion-input type="text" placeholder="UF"></ion-input>
+      <ion-input type="text" placeholder="Cidade"></ion-input>
+      <ion-input type="text" placeholder="Bairro"></ion-input>
+      <ion-label position="stacked">Complemento</ion-label>
+      <ion-textarea></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">
+        Login <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">
+        Senha <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-textarea
+      readonly>
+        Termos de serviço:
+      </ion-textarea>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-button
+  expand="block"
+  class="ion-margin-top ion-margin-bottom">
+    Cadastrar
+  </ion-button>
+</ion-content>
