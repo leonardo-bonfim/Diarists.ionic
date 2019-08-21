@@ -15,6 +15,10 @@ const routes: Routes = [
       {
         path: 'principal',
         loadChildren: './pages/principal/principal.module#PrincipalPageModule'
+      },
+      {
+        path: 'procurar-contrato',
+        loadChildren: './pages/procurar-contrato/procurar-contrato.module#ProcurarContratoPageModule'
       }
     ]
   }
