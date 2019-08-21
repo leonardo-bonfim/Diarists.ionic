@@ -16,7 +16,7 @@ export class LoginPage implements OnInit {
   }
 
   logar() {
-    this.router.navigateByUrl('/principal');
+    this.router.navigateByUrl('tabs/principal');
   }
 
 }

@@ -11,58 +11,85 @@
   
   <ion-list>
     <ion-item>
-      <ion-label position="stacked">
+      <ion-label color="primary" position="stacked">
         Nome <ion-text color="danger">*</ion-text>
-      </ion-label>
-      <ion-input required type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">
-        Sobrenome
-      </ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">
-        CPF <ion-text color="danger">*</ion-text>
       </ion-label>
       <ion-input required type="text"></ion-input>
     </ion-item>
     
     <ion-item>
-      <ion-label position="stacked">Endereço</ion-label>
+      <ion-label color="primary" position="stacked">
+        Sobrenome
+      </ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    
+    <ion-radio-group>
+      <ion-item lines="none">
+        <ion-label class="label-placeholded">Masculino</ion-label>
+        <ion-radio value="tesla"></ion-radio>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label class="label-placeholded">Feminino</ion-label>
+        <ion-radio value="ford"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+    <ion-item>
+      <ion-label color="primary" position="stacked">
+        CPF <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" position="stacked">Endereço</ion-label>
       <ion-input type="text" placeholder="CEP" class="ion-margin-top"></ion-input>
       <ion-input type="text" placeholder="Logradouro"></ion-input>
       <ion-input type="text" placeholder="Número"></ion-input>
       <ion-input type="text" placeholder="UF"></ion-input>
       <ion-input type="text" placeholder="Cidade"></ion-input>
       <ion-input type="text" placeholder="Bairro"></ion-input>
-      <ion-label position="stacked">Complemento</ion-label>
+      <ion-label color="primary" position="stacked">Complemento</ion-label>
       <ion-textarea></ion-textarea>
     </ion-item>
-
+    
     <ion-item>
-      <ion-label position="stacked">
-        Login <ion-text color="danger">*</ion-text>
+      <ion-label color="primary" position="stacked">
+        Email <ion-text color="danger">*</ion-text>
       </ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
-
+    
     <ion-item>
-      <ion-label position="stacked">
+      <ion-label color="primary" position="stacked">
         Senha <ion-text color="danger">*</ion-text>
       </ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
 
-    <ion-item lines="full">
+    <ion-radio-group>
+      <ion-list-header>
+        <ion-text color="primary">
+            Que tipo de usuário você é?
+        </ion-text>
+      </ion-list-header>
+      <ion-item lines="none">
+        <ion-label class="label-placeholded" color="primary">Contratante</ion-label>
+        <ion-radio slot="start" value="contratante"></ion-radio>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label class="label-placeholded" color="primary">Diarista</ion-label>
+        <ion-radio slot="start" value="diarista"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+    <!-- <ion-item lines="full">
       <ion-textarea
       readonly>
         Termos de serviço:
       </ion-textarea>
-    </ion-item>
+    </ion-item> -->
 
   </ion-list>
 

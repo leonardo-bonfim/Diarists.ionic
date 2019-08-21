@@ -1,6 +1,6 @@
 ion-content {
 
-    --background: linear-gradient(#f8f8f8, #F562A6);
+    --background: linear-gradient(#f8f8f8, #ccc);
 
     #divLogo {
         text-align: center;
@@ -24,11 +24,34 @@ ion-content {
         --background: transparent !important;
     }
 
-}
+    .div-fora{
+        height: 100%;
+        display: flex;
+        align-items: center!important;
+        justify-content: center;
+        flex-direction: column;
 
-.div-fora{
-    height: 100%;
-    display: flex;
-    align-items: center!important;
-    justify-content: center;
+        .bem-vindo {
+            display: block;
+            transform: rotate(-12grad);
+            
+            h1 {
+                width: 100%;
+                font-family: 'lobster';
+                font-size: 4.5rem;
+                text-align: start;
+            }
+            h2 {
+                width: 100%;
+                font-family: 'lobster';
+                font-size: 3rem;
+                text-align: end;
+            }
+        }
+    
+        .div-dentro {
+            width: 90%;
+        }
+    }
+
 }
