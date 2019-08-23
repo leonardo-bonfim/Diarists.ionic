@@ -14,11 +14,11 @@ const routes: Routes = [
     children: [
       {
         path: 'principal',
-        loadChildren: './pages/principal/principal.module#PrincipalPageModule'
+        loadChildren: '../pages/principal/principal.module#PrincipalPageModule'
       },
       {
         path: 'procurar-contrato',
-        loadChildren: './pages/procurar-contrato/procurar-contrato.module#ProcurarContratoPageModule'
+        loadChildren: '../pages/procurar-contrato/procurar-contrato.module#ProcurarContratoPageModule'
       }
     ]
   }

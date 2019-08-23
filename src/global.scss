@@ -29,3 +29,9 @@
     font-family: 'lobster';
     src: url(./assets/fonts/Lobster-Regular.ttf);
 }
+
+.d-align-items-center {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
