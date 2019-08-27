@@ -1,5 +1,7 @@
 {
   "name": "diacontr.ionic",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
