@@ -15,11 +15,11 @@
 
       <ion-list lines="none" >
         <ion-item>
-          <ion-input type="text" placeholder="Email"></ion-input>
+          <ion-input type="text" placeholder="Email" #usuario></ion-input>
         </ion-item>
     
         <ion-item>
-          <ion-input type="password" placeholder="Senha"></ion-input>
+          <ion-input type="password" placeholder="Senha" #senha></ion-input>
         </ion-item>
       </ion-list>
     
@@ -30,7 +30,7 @@
             color="secondary"
             expand="block"
             shape="round"
-            (click)="logar()">
+            (click)="logar(usuario.value, senha.value)">
               Entrar
             </ion-button>
           </ion-col>
