@@ -17,7 +17,7 @@ export class CriacaoContratoModalComponent implements OnInit {
   contratoForm: FormGroup;
   enderecoForm: FormGroup;
 
-  urlGoogleGeoCode: string = 'https://maps.googleapis.com/';
+  urlGoogleGeoCode = 'https://maps.googleapis.com/';
 
 
   constructor(
@@ -39,8 +39,9 @@ export class CriacaoContratoModalComponent implements OnInit {
   }
 
   async contratoSubmit(contratoData) {
-    // tslint:disable-next-line: max-line-length
-    const a = await this.requestService.getRequest(`${this.urlGoogleGeoCode}maps/api/geocode/json?address=${contratoData.cep}&key=${environment.googleApiKey}`);
+    const a: any = await this.requestService.getRequest(
+      `${this.urlGoogleGeoCode}maps/api/geocode/json?address=${contratoData.cep}&key=${environment.googleApiKey}
+    `);
     const contrato = new Contrato();
     contrato.descricao = contratoData.descricao;
     contrato.restricao = contratoData.restricao;
@@ -48,7 +49,10 @@ export class CriacaoContratoModalComponent implements OnInit {
     contrato.longitude = a.results[0].geometry.location.lng;
     contrato.endereco = this.objectToEndereco(contratoData);
 
-    this.requestService.postRequest(contrato);
+    console.log(contrato.latitude); 
+    console.log(contrato.longitude); 
+
+    // this.requestService.postRequest(contrato);
   }
 
   private createForm() {

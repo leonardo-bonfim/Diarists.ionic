@@ -13,14 +13,8 @@ import { CriacaoContratoModalComponent } from './components/criacao-contrato-mod
 export class PrincipalPage implements OnInit {
 
   constructor(
-    private geolocation: Geolocation,
     private modalController: ModalController
-  ) {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      console.log(resp.coords.latitude);
-      console.log(resp.coords.longitude);
-    });
-  }
+  ) { }
 
   ngOnInit() {
   }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-//import { HTTP } from '@ionic-native/http/ngx';
+// import { HTTP } from '@ionic-native/http/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class ApiRequestService {
   getRequest(url) {
     return this.http.get(url).toPromise().then(resolve => {
       return resolve;
-    })
+    });
   }
 
 }
