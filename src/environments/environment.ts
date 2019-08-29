@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  googleApiKey: 'AIzaSyAsCcoI2j6T92d8DtgUPARUkN7zEE1iaRk'
+  googleApiKey: 'AIzaSyAsCcoI2j6T92d8DtgUPARUkN7zEE1iaRk',
+
+  tokenWhitelistedDomains: [ new RegExp('localhost:8080') ],
+  tokenBlacklistedRoutes: [ new RegExp('\/oauth\/token') ]
 };
 
 /*

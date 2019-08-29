@@ -52,7 +52,7 @@ export class CriacaoContratoModalComponent implements OnInit {
     console.log(contrato.latitude); 
     console.log(contrato.longitude); 
 
-    // this.requestService.postRequest(contrato);
+    this.requestService.postRequest(contrato);
   }
 
   private createForm() {

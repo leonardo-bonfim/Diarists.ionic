@@ -1,6 +1,6 @@
-import { AuthService } from './seguranca/auth.service';
+import { environment } from './../environments/environment';
+import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
-import { ApiRequestService } from './services/api-request.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -14,6 +14,13 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { SegurancaModule } from './seguranca/seguranca.module';
+import { ApiRequestService } from './services/api-request.service';
+import { AlertService } from './services/alert/alert.service';
+import { AuthService } from './seguranca/auth.service';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,8 +29,15 @@ import { SegurancaModule } from './seguranca/seguranca.module';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    SegurancaModule,
     HttpClientModule,
-    SegurancaModule
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: environment.tokenWhitelistedDomains,
+        blacklistedRoutes: environment.tokenBlacklistedRoutes
+      }
+    })
   ],
   providers: [
     StatusBar,
@@ -31,7 +45,8 @@ import { SegurancaModule } from './seguranca/seguranca.module';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Geolocation,
     ApiRequestService,
-    AuthService
+    AuthService,
+    AlertService
   ],
   bootstrap: [AppComponent]
 })
