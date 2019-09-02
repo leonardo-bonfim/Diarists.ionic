@@ -8,12 +8,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiRequestService {
 
-  private url = 'http://localhost:8080';
-
   constructor(private http: HttpClient) { }
 
-  postRequest(body: any) {
-    this.http.post(this.url + '/contrato', body).toPromise().then(() => {
+  postRequest(url, body: any) {
+    this.http.post(url, body).toPromise().then(() => {
       console.log('gravado');
     });
   }

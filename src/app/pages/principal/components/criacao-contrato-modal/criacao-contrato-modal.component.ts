@@ -15,16 +15,14 @@ export class CriacaoContratoModalComponent implements OnInit {
 
   isEnderecoCadastro = true;
   contratoForm: FormGroup;
-  enderecoForm: FormGroup;
 
   urlGoogleGeoCode = 'https://maps.googleapis.com/';
-
 
   constructor(
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private requestService: ApiRequestService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.createForm();
@@ -52,7 +50,7 @@ export class CriacaoContratoModalComponent implements OnInit {
     console.log(contrato.latitude); 
     console.log(contrato.longitude); 
 
-    this.requestService.postRequest(contrato);
+    this.requestService.postRequest('http://192.168.0.10:8080/contrato', contrato);
   }
 
   private createForm() {

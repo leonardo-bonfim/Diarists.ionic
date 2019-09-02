@@ -1,3 +1,5 @@
+import { HTTP } from '@ionic-native/http/ngx';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from './../environments/environment';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,6 +10,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Camera } from '@ionic-native/Camera/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -46,7 +49,8 @@ export function tokenGetter() {
     Geolocation,
     ApiRequestService,
     AuthService,
-    AlertService
+    AlertService,
+    Camera,
   ],
   bootstrap: [AppComponent]
 })

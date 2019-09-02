@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AuthService {
 
-  oauthTokenUrl = 'http://localhost:8080/oauth/token';
+  oauthTokenUrl = 'http://192.168.0.10:8080/oauth/token';
   jwtPayload: any;
   jwtHelperService = new JwtHelperService();
 
@@ -32,6 +32,7 @@ export class AuthService {
         this.armazenarToken(response.access_token);
       })
       .catch(response => {
+        console.log(response)
         if(response.status === 400) {
           if(response.error.error === 'invalid_grant') {
             return Promise.reject('Usuário ou senha inválida!');

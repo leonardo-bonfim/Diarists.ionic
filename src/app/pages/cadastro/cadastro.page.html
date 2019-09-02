@@ -9,93 +9,108 @@
 
 <ion-content>
   
-  <ion-list>
-    <ion-item>
-      <ion-label color="primary" position="stacked">
-        Nome <ion-text color="danger">*</ion-text>
-      </ion-label>
-      <ion-input required type="text"></ion-input>
-    </ion-item>
+  <form [formGroup]="usuarioForm" (ngSubmit)="usuarioSubmit(usuarioForm.value)">
     
-    <ion-item>
-      <ion-label color="primary" position="stacked">
-        Sobrenome
-      </ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    
-    <ion-radio-group>
-      <ion-item lines="none">
-        <ion-label class="label-placeholded">Masculino</ion-label>
-        <ion-radio value="tesla"></ion-radio>
+    <ion-list>
+      <ion-item>
+        <ion-label color="primary" position="stacked">
+          Nome <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input
+        required
+        type="text"
+        formControlName="nome"></ion-input>
       </ion-item>
-      <ion-item lines="full">
-        <ion-label class="label-placeholded">Feminino</ion-label>
-        <ion-radio value="ford"></ion-radio>
+      
+      <ion-item>
+        <ion-label color="primary" position="stacked">
+          Sobrenome
+        </ion-label>
+        <ion-input
+        type="text"
+        formControlName="sobrenome"
+        ></ion-input>
       </ion-item>
-    </ion-radio-group>
-
-    <ion-item>
-      <ion-label color="primary" position="stacked">
-        CPF <ion-text color="danger">*</ion-text>
-      </ion-label>
-      <ion-input required type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="primary" position="stacked">Endereço</ion-label>
-      <ion-input type="text" placeholder="CEP" class="ion-margin-top"></ion-input>
-      <ion-input type="text" placeholder="Logradouro"></ion-input>
-      <ion-input type="text" placeholder="Número"></ion-input>
-      <ion-input type="text" placeholder="UF"></ion-input>
-      <ion-input type="text" placeholder="Cidade"></ion-input>
-      <ion-input type="text" placeholder="Bairro"></ion-input>
-      <ion-label color="primary" position="stacked">Complemento</ion-label>
-      <ion-textarea></ion-textarea>
-    </ion-item>
-    
-    <ion-item>
-      <ion-label color="primary" position="stacked">
-        Email <ion-text color="danger">*</ion-text>
-      </ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    
-    <ion-item>
-      <ion-label color="primary" position="stacked">
-        Senha <ion-text color="danger">*</ion-text>
-      </ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-radio-group>
-      <ion-list-header>
-        <ion-text color="primary">
-            Que tipo de usuário você é?
-        </ion-text>
-      </ion-list-header>
-      <ion-item lines="none">
-        <ion-label class="label-placeholded" color="primary">Contratante</ion-label>
-        <ion-radio slot="start" value="contratante"></ion-radio>
+      
+      <ion-radio-group formControlName="sexo">
+        <ion-item lines="none">
+          <ion-label class="label-placeholded">Masculino</ion-label>
+          <ion-radio value="M"></ion-radio>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label class="label-placeholded">Feminino</ion-label>
+          <ion-radio value="F"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+  
+      <ion-item>
+        <ion-label color="primary" position="stacked">
+          CPF <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input
+        required
+        type="text"
+        formControlName="cpf"></ion-input>
       </ion-item>
-      <ion-item lines="none">
-        <ion-label class="label-placeholded" color="primary">Contratada</ion-label>
-        <ion-radio slot="start" value="diarista"></ion-radio>
+  
+      <ion-item>
+        <ion-label color="primary" position="stacked">Endereço</ion-label>
+        <ion-input formControlName="cep" type="text" placeholder="CEP" class="ion-margin-top"></ion-input>
+        <ion-input formControlName="logradouro" type="text" placeholder="Logradouro"></ion-input>
+        <ion-input formControlName="numero" type="text" placeholder="Número"></ion-input>
+        <ion-input formControlName="uf" type="text" placeholder="UF"></ion-input>
+        <ion-input formControlName="cidade" type="text" placeholder="Cidade"></ion-input>
+        <ion-input formControlName="bairro" type="text" placeholder="Bairro"></ion-input>
+        <ion-label color="primary" position="stacked">Complemento</ion-label>
+        <ion-textarea></ion-textarea>
       </ion-item>
-    </ion-radio-group>
+      
+      <ion-item>
+        <ion-label color="primary" position="stacked">
+          Email <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input
+        type="text"
+        formControlName="email"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label color="primary" position="stacked">
+          Senha <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input
+        type="text"
+        formControlName="senha"></ion-input>
+      </ion-item>
+  
+      <ion-button
+      class="ion-margin-top"
+      color="{{ buttonImagemCor }}"
+      type="button"
+      expand="block"
+      shape="round"
+      size="default"
+      (click)="pegarFoto()">
+        <ion-icon name="image"></ion-icon>
+      </ion-button>
+  
+      <!-- <ion-item lines="full">
+        <ion-textarea
+        readonly>
+          Termos de serviço:
+        </ion-textarea>
+      </ion-item> -->
+  
+    </ion-list>
 
-    <!-- <ion-item lines="full">
-      <ion-textarea
-      readonly>
-        Termos de serviço:
-      </ion-textarea>
-    </ion-item> -->
+    <ion-button
+    type="submit"
+    expand="block"
+    class="ion-margin-top ion-margin-bottom"
+    >
+      Cadastrar
+    </ion-button>
+  </form>
 
-  </ion-list>
 
-  <ion-button
-  expand="block"
-  class="ion-margin-top ion-margin-bottom">
-    Cadastrar
-  </ion-button>
 </ion-content>
