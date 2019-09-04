@@ -30,17 +30,10 @@ export class CadastroPage implements OnInit {
   pegarFoto() {
     this.imagemService.takePhoto(0).then(
       data => {
-        this.dataToBlob(data);
+        this.myPhoto = data;
         this.buttonImagemCor = 'success';
       }
     )
-  }
-
-  private dataToBlob(data: any) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      this.myPhoto = new Blob([reader.result], {type: data.type})
-    }
   }
 
   usuarioSubmit(usuarioData) {

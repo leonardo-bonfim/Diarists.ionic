@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AlertService } from './../../services/alert/alert.service';
 import { AuthService } from './../../seguranca/auth.service';
 import { environment } from 'src/environments/environment';
+import { ImagemService } from 'src/app/services/imagem.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private auth: AuthService,
     private alertService: AlertService,
-    private requestService: ApiRequestService
+    private requestService: ApiRequestService,
+    private imagemService: ImagemService
   ) { }
 
   ngOnInit() {
@@ -26,15 +28,17 @@ export class LoginPage implements OnInit {
   logar(usuario: string, senha: string) {
     this.auth.login(usuario, senha)
       .then(() => {
-
         this.requestService.getRequest(`${environment.apiUrl}/usuario/foto?email=${usuario}`).then(
-          data => localStorage.setItem('foto', data as string)
+          data => {
+            localStorage.setItem('foto', data as string)
+            this.router.navigate(['tabs/principal'])
+          }
         )
-        this.router.navigate(['tabs/principal'])
 
       })
       .catch(erro => {
         this.alertService.toast(erro, 'bottom');
       });
   }
+
 }

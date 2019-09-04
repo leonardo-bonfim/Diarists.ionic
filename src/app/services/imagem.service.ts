@@ -19,7 +19,7 @@ export class ImagemService {
   async takePhoto(sourceType: number) {
     const options: CameraOptions = {
       quality: 10,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       correctOrientation: true,
@@ -28,14 +28,10 @@ export class ImagemService {
 
     return await this.camera.getPicture(options).then(
       imageData => {
-        return this.webview.convertFileSrc(imageData);
+        return imageData;
       }
     )
 
-  }
-
-  public bs4ToImage(data) {
-    return 'data:image/jpeg;base64,' + data;
   }
 
   bs4toBlob(b64Data: string, contentType: string, sliceSize: number) {

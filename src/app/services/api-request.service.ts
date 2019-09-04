@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // import { HTTP } from '@ionic-native/http/ngx';
 
@@ -17,7 +17,12 @@ export class ApiRequestService {
   }
 
   getRequest(url) {
-    return this.http.get(url).toPromise();
+    return this.http.get(url, this.addHeaders()).toPromise();
+  }
+
+  private addHeaders() {
+    var access_token = localStorage.getItem('token');
+    return { headers: new HttpHeaders().set("Authorization", `Bearer ${access_token}`), responseType: 'text' as 'json'};
   }
 
 }

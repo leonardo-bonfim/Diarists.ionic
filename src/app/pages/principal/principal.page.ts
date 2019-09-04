@@ -20,7 +20,9 @@ export class PrincipalPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.foto = this.imagemService.bs4ToImage(localStorage.getItem('foto'));
+    const foto = localStorage.getItem('foto');
+    console.log(foto)
+    this.foto = 'data:image/jpeg;base64,' + foto;
   }
 
   async abrirModal() {
