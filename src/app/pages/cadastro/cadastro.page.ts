@@ -1,9 +1,9 @@
-import { Usuario } from './../../models/usuario';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { ImagemService } from 'src/app/services/imagem.service';
 import { Endereco } from 'src/app/models/endereco';
+import { Usuario } from './../../models/usuario';
 import { ApiRequestService } from './../../services/api-request.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class CadastroPage implements OnInit {
   usuarioForm: FormGroup
 
   constructor(
-    private image: ImagemService,
+    private imagemService: ImagemService,
     private formBuilder: FormBuilder,
     private requestService: ApiRequestService
   ) { }
@@ -28,12 +28,19 @@ export class CadastroPage implements OnInit {
   }
 
   pegarFoto() {
-    this.image.takePhoto(0).then(
+    this.imagemService.takePhoto(0).then(
       data => {
-        this.myPhoto = data;
+        this.dataToBlob(data);
         this.buttonImagemCor = 'success';
       }
     )
+  }
+
+  private dataToBlob(data: any) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      this.myPhoto = new Blob([reader.result], {type: data.type})
+    }
   }
 
   usuarioSubmit(usuarioData) {
@@ -42,7 +49,7 @@ export class CadastroPage implements OnInit {
     usuario.sobrenome = usuarioData.sobrenome;
     usuario.cpf = usuarioData.cpf;
     usuario.email = usuarioData.email;
-    usuario.foto = this.myPhoto
+    usuario.foto = this.myPhoto;
     usuario.senha = usuarioData.senha;
     usuario.sexo = usuarioData.sexo;
     usuario.endereco = this.objectToEndereco(usuarioData);

@@ -1,3 +1,4 @@
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Injectable } from '@angular/core';
 
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
@@ -12,12 +13,13 @@ export class ImagemService {
   constructor(
     private camera: Camera,
     private requestService: ApiRequestService,
+    private webview: WebView
   ) { }
 
   async takePhoto(sourceType: number) {
     const options: CameraOptions = {
       quality: 10,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       correctOrientation: true,
@@ -26,7 +28,7 @@ export class ImagemService {
 
     return await this.camera.getPicture(options).then(
       imageData => {
-        return this.bs4ToImage(imageData);
+        return this.webview.convertFileSrc(imageData);
       }
     )
 
@@ -34,6 +36,30 @@ export class ImagemService {
 
   public bs4ToImage(data) {
     return 'data:image/jpeg;base64,' + data;
+  }
+
+  bs4toBlob(b64Data: string, contentType: string, sliceSize: number) {
+    contentType = contentType || '';
+    sliceSize = sliceSize || 512;
+
+    var byteCharacters = atob(b64Data);
+    var byteArrays = [];
+
+    for(var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      var slice = byteCharacters.slice(offset, offset = sliceSize);
+
+      var byteNumbers = new Array(slice.length);
+      for (var i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      var byteArray = new Uint8Array(byteNumbers);
+
+      byteArrays.push(byteArray);
+    }
+
+    var blob = new Blob(byteArrays, { type: contentType });
+    return blob;
   }
 
 }

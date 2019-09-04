@@ -17,9 +17,7 @@ export class ApiRequestService {
   }
 
   getRequest(url) {
-    return this.http.get(url).toPromise().then(resolve => {
-      return resolve;
-    });
+    return this.http.get(url).toPromise();
   }
 
 }

@@ -1,9 +1,9 @@
+import { ImagemService } from 'src/app/services/imagem.service';
 import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { CriacaoContratoModalComponent } from './components/criacao-contrato-modal/criacao-contrato-modal.component';
-
 
 @Component({
   selector: 'app-principal',
@@ -12,11 +12,15 @@ import { CriacaoContratoModalComponent } from './components/criacao-contrato-mod
 })
 export class PrincipalPage implements OnInit {
 
+  foto: string;
+
   constructor(
-    private modalController: ModalController
+    private modalController: ModalController,
+    private imagemService: ImagemService
   ) { }
 
   ngOnInit() {
+    this.foto = this.imagemService.bs4ToImage(localStorage.getItem('foto'));
   }
 
   async abrirModal() {
