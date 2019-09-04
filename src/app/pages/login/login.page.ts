@@ -2,7 +2,7 @@ import { ApiRequestService } from './../../services/api-request.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AlertService } from './../../services/alert/alert.service';
+import { AlertService } from '../../services/alert.service';
 import { AuthService } from './../../seguranca/auth.service';
 import { environment } from 'src/environments/environment';
 import { ImagemService } from 'src/app/services/imagem.service';
@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
         this.requestService.getRequest(`${environment.apiUrl}/usuario/foto?email=${usuario}`).then(
           data => {
             localStorage.setItem('foto', data as string)
-            this.router.navigate(['tabs/principal'])
+            this.router.navigate(['tabs/principal']);            
           }
         )
 

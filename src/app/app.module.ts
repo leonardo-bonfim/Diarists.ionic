@@ -19,7 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { SegurancaModule } from './seguranca/seguranca.module';
 import { ApiRequestService } from './services/api-request.service';
-import { AlertService } from './services/alert/alert.service';
+import { AlertService } from './services/alert.service';
 import { AuthService } from './seguranca/auth.service';
 
 export function tokenGetter() {

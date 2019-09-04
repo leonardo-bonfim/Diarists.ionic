@@ -19,4 +19,13 @@ export class AlertService {
       });
   }
 
+  async alert_success() {
+    const alert = await this.alertCtrl.create({
+      buttons: ['OK'],
+    });
+    
+    await alert.present();    
+    let result = await alert.onDidDismiss();
+  }
+
 }

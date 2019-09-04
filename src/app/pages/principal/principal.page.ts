@@ -21,8 +21,12 @@ export class PrincipalPage implements OnInit {
 
   ngOnInit() {
     const foto = localStorage.getItem('foto');
-    console.log(foto)
-    this.foto = 'data:image/jpeg;base64,' + foto;
+    if (foto) {
+      this.foto = 'data:image/jpeg;base64,' + foto;
+    }
+    else {
+      this.foto = '../../../assets/anon_img.png';
+    }
   }
 
   async abrirModal() {
