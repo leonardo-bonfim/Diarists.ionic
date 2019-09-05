@@ -1,8 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { ApiRequestService } from './../../../../services/api-request.service';
 import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Contrato } from 'src/app/models/contrato';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Endereco } from 'src/app/models/endereco';
 import { environment } from 'src/environments/environment';
 
@@ -21,6 +22,7 @@ export class CriacaoContratoModalComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private formBuilder: FormBuilder,
+    private httpClient: HttpClient,
     private requestService: ApiRequestService
   ) { }
 
@@ -37,20 +39,26 @@ export class CriacaoContratoModalComponent implements OnInit {
   }
 
   async contratoSubmit(contratoData) {
-    const a: any = await this.requestService.getRequest(
+    this.httpClient.get(
       `${this.urlGoogleGeoCode}maps/api/geocode/json?address=${contratoData.cep}&key=${environment.googleApiKey}
-    `);
-    const contrato = new Contrato();
-    contrato.descricao = contratoData.descricao;
-    contrato.restricao = contratoData.restricao;
-    contrato.latitude = a.results[0].geometry.location.lat;
-    contrato.longitude = a.results[0].geometry.location.lng;
-    contrato.endereco = this.objectToEndereco(contratoData);
-
-    console.log(contrato.latitude); 
-    console.log(contrato.longitude); 
-
-    this.requestService.postRequest('http://192.168.0.10:8080/contrato', contrato);
+    `).toPromise().then(
+      a => {
+        const contrato = new Contrato();
+        contrato.descricao = contratoData.descricao;
+        contrato.restricao = contratoData.restricao;
+        contrato.latitude = (a as any).results[0].geometry.location.lat;
+        contrato.longitude = (a as any).results[0].geometry.location.lng;
+        contrato.endereco = this.objectToEndereco(contratoData);
+    
+        console.log(contrato.latitude);
+        console.log(contrato.longitude);
+    
+        this.requestService.postRequest('http://192.168.0.10:8080/contrato', contrato).then(
+          () => this.fecharModal()
+        );
+      }
+    );
+   
   }
 
   private createForm() {
@@ -58,12 +66,12 @@ export class CriacaoContratoModalComponent implements OnInit {
     this.contratoForm = this.formBuilder.group({
       descricao: [null],
       restricao: [null],
-      cep: [null],
-      logradouro: [null],
-      numero: [null],
-      uf: [null],
-      cidade: [null],
-      bairro: [null]
+      cep: [null, Validators.required],
+      logradouro: [null, Validators.required],
+      numero: [null, Validators.required],
+      uf: [null, Validators.required],
+      cidade: [null, Validators.required],
+      bairro: [null, Validators.required]
     });
   }
 

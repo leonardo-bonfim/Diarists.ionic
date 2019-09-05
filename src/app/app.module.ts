@@ -1,5 +1,3 @@
-import { HTTP } from '@ionic-native/http/ngx';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from './../environments/environment';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';

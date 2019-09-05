@@ -10,19 +10,25 @@ export class ApiRequestService {
 
   constructor(private http: HttpClient) { }
 
-  postRequest(url, body: any) {
-    this.http.post(url, body).toPromise().then(() => {
+  async postRequest(url, body: any) {
+    await this.http.post(url, body, this.addHeaders()).toPromise().then(() => {
       console.log('gravado');
     });
   }
 
-  getRequest(url) {
-    return this.http.get(url, this.addHeaders()).toPromise();
+  getRequest(url, isString?: boolean) {
+    return this.http.get(url, this.addHeaders(isString)).toPromise();
   }
 
-  private addHeaders() {
+  private addHeaders(isString?: boolean) {
     var access_token = localStorage.getItem('token');
-    return { headers: new HttpHeaders().set("Authorization", `Bearer ${access_token}`), responseType: 'text' as 'json'};
+    let data = { headers: new HttpHeaders().set("Authorization", `Bearer ${access_token}`)};
+
+    if(isString) {
+      Object.assign(data, {responseType: 'text' as 'json'})
+    }
+
+    return data;
   }
 
 }

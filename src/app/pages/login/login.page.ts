@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
   logar(usuario: string, senha: string) {
     this.auth.login(usuario, senha)
       .then(() => {
-        this.requestService.getRequest(`${environment.apiUrl}/usuario/foto?email=${usuario}`).then(
+        this.requestService.getRequest(`${environment.apiUrl}/usuario/foto?email=${usuario}`, true).then(
           data => {
             localStorage.setItem('foto', data as string)
             this.router.navigate(['tabs/principal']);            
