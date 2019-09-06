@@ -56,6 +56,7 @@ export class CriacaoContratoModalComponent implements OnInit {
         this.requestService.postRequest('http://192.168.0.10:8080/contrato', contrato).then(
           () => this.fecharModal()
         );
+        
       }
     );
    

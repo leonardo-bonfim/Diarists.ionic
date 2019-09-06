@@ -16,8 +16,8 @@ export class ApiRequestService {
     });
   }
 
-  getRequest(url, isString?: boolean) {
-    return this.http.get(url, this.addHeaders(isString)).toPromise();
+  async getRequest(url, isString?: boolean) {
+    return await this.http.get(url, this.addHeaders(isString)).toPromise();
   }
 
   private addHeaders(isString?: boolean) {

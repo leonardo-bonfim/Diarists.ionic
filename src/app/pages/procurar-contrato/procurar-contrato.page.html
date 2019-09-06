@@ -4,7 +4,7 @@
 
       <ion-button>
         <ion-avatar>
-            <img src="https://randomuser.me/api/portraits/women/1.jpg">
+            <img src="{{foto}}">
         </ion-avatar>
       </ion-button>
   
@@ -20,5 +20,60 @@
 </ion-header>
 
 <ion-content>
+  
+  <ion-list>
+    <ion-item lines="none">
+      <ion-text text-center color="primary">
+        <h1>Descricão</h1>
+      </ion-text>
+    </ion-item>
+    
+    <ion-item>
+      <ion-textarea
+      readonly
+      text-center
+      value="{{contrato.descricao}}">
+      </ion-textarea>
+    </ion-item>
 
+    <ion-item lines="none">
+      <ion-text text-center color="primary">
+        <h2>Solicitante</h2>
+        <p>{{contrato.nome}}</p>
+      </ion-text>
+    </ion-item>
+
+  </ion-list>
+  
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="--background-color">
+    <ion-grid>
+      <ion-row padding>
+        <ion-col>
+          <ion-button 
+          expand="block"
+          size="large"
+          shape="round"
+          fill="outline"
+          color="success">
+            <ion-icon name="checkmark"></ion-icon>
+          </ion-button>
+        </ion-col>
+    
+        <ion-col size="6">
+          <ion-button 
+          expand="block"
+          size="large"
+          shape="round"
+          fill="outline"
+          color="danger"
+          (click)="passarContrato()">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
