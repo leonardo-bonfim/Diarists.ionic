@@ -1,4 +1,3 @@
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Injectable } from '@angular/core';
 
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
@@ -13,7 +12,6 @@ export class ImagemService {
   constructor(
     private camera: Camera,
     private requestService: ApiRequestService,
-    private webview: WebView
   ) { }
 
   async takePhoto(sourceType: number) {

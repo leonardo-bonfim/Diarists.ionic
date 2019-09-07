@@ -43,10 +43,10 @@ export class ProcurarContratoPage implements OnInit {
   }
 
   passarContrato() {
-    if(this.contratos.content.length > 0) {
-      this.contrato.descricao = this.contratos.content[0].descricao;
-      this.contrato.nome = this.contratos.content[0].usuarios[0].nome;
-      this.contratos.content.shift();
+    if(this.contratos.data.content.length > 0) {
+      this.contrato.descricao = this.contratos.data.content[0].descricao;
+      this.contrato.nome = this.contratos.data.content[0].usuarios[0].nome;
+      this.contratos.data.content.shift();
     }
     else {
       this.contrato.descricao = '';

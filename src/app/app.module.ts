@@ -9,7 +9,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Camera } from '@ionic-native/Camera/ngx';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -50,7 +49,6 @@ export function tokenGetter() {
     AuthService,
     AlertService,
     Camera,
-    WebView
   ],
   bootstrap: [AppComponent]
 })

@@ -52,8 +52,8 @@ export class CriacaoContratoModalComponent implements OnInit {
     
         console.log(contrato.latitude);
         console.log(contrato.longitude);
-    
-        this.requestService.postRequest('http://192.168.0.10:8080/contrato', contrato).then(
+
+        this.requestService.postRequest(`${environment.apiUrl}/contrato`, contrato).then(
           () => this.fecharModal()
         );
         

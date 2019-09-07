@@ -1,13 +1,14 @@
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  oauthTokenUrl = 'http://192.168.0.10:8080/oauth/token';
+  oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
   jwtPayload: any;
   jwtHelperService = new JwtHelperService();
 

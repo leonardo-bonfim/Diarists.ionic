@@ -16,7 +16,6 @@ export class PrincipalPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private imagemService: ImagemService
   ) { }
 
   ngOnInit() {
