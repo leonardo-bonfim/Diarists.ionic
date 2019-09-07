@@ -12,9 +12,12 @@ export class AlertService {
   ) { }
 
   async toast(title: string, position) {
-    return await this.toastCtrl.create({message: title,
-    position, duration: 3000})
-      .then(resultado => {
+    return await this.toastCtrl.create({
+      message: title,
+      position, 
+      duration: 3000,
+      animated: true
+    }).then(resultado => {
         resultado.present();
       });
   }

@@ -19,7 +19,6 @@ export class LoginPage implements OnInit {
     private auth: AuthService,
     private alertService: AlertService,
     private requestService: ApiRequestService,
-    private imagemService: ImagemService
   ) { }
 
   ngOnInit() {
@@ -34,7 +33,6 @@ export class LoginPage implements OnInit {
             this.router.navigate(['tabs/principal']);            
           }
         )
-
       })
       .catch(erro => {
         this.alertService.toast(erro, 'bottom');

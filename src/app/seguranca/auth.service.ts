@@ -38,6 +38,10 @@ export class AuthService {
             return Promise.reject('Usuário ou senha inválida!');
           }
         }
+        if(response.status === 0) {
+          return Promise.reject('O servidor está desconectado!')
+        }
+        console.log(response)
         return Promise.reject(response);
       });
   }

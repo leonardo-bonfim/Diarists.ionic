@@ -11,9 +11,13 @@ export class ApiRequestService {
   constructor(private http: HttpClient) { }
 
   async postRequest(url, body: any) {
-    await this.http.post(url, body, this.addHeaders()).toPromise().then(() => {
-      console.log('gravado');
-    });
+    await this.http.post(url, body, this.addHeaders()).toPromise()
+      .then(() => {
+        console.log('gravado');
+      })
+      .catch(data => {
+        return Promise.reject(data.error.errors);
+      });
   }
 
   async getRequest(url, isString?: boolean) {

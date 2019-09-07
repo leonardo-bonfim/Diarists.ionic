@@ -5,6 +5,8 @@ import { ImagemService } from 'src/app/services/imagem.service';
 import { Endereco } from 'src/app/models/endereco';
 import { Usuario } from './../../models/usuario';
 import { ApiRequestService } from './../../services/api-request.service';
+import { environment } from 'src/environments/environment';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -20,7 +22,8 @@ export class CadastroPage implements OnInit {
   constructor(
     private imagemService: ImagemService,
     private formBuilder: FormBuilder,
-    private requestService: ApiRequestService
+    private requestService: ApiRequestService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -48,7 +51,14 @@ export class CadastroPage implements OnInit {
     usuario.endereco = this.objectToEndereco(usuarioData);
 
     console.log(usuario)
-    this.requestService.postRequest('http://192.168.0.10:8080/usuario', usuario);
+    this.requestService.postRequest(`${environment.apiUrl}/usuario`, usuario)
+      .catch(
+        data => {
+          data.forEach(element => {
+            this.alertService.toast(element, 'top')
+          });
+        }
+      );
   }
 
   private createForm() {
