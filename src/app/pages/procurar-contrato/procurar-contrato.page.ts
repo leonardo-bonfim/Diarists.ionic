@@ -13,7 +13,6 @@ import { ApiRequestService } from './../../services/api-request.service';
 })
 export class ProcurarContratoPage implements OnInit {
 
-  foto: string;
   contrato: any = {
     descricao: '',
     nome: ''
@@ -27,8 +26,6 @@ export class ProcurarContratoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    this.carregarFoto();
 
     const loading = this.loadingController.create({
       message: 'Aguarde...',
@@ -77,16 +74,6 @@ export class ProcurarContratoPage implements OnInit {
         }
       }
     );
-  }
-
-  private carregarFoto(){
-    const foto = localStorage.getItem('foto');
-    if (foto) {
-      this.foto = 'data:image/jpeg;base64,' + foto;
-    }
-    else {
-      this.foto = '../../../assets/anon_img.png';
-    }
   }
 
 }

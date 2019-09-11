@@ -1,0 +1,19 @@
+ion-toolbar {
+
+    padding-right: 16px;
+    padding-left: 16px;
+
+    ion-buttons{
+        width: 100%;
+
+        ion-avatar {
+            width: 35px;
+            height: 35px;
+        }
+
+        ion-icon {
+            font-size: 2rem
+        }
+    }
+    
+}

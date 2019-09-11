@@ -12,20 +12,11 @@ import { CriacaoContratoModalComponent } from './components/criacao-contrato-mod
 })
 export class PrincipalPage implements OnInit {
 
-  foto: string;
-
   constructor(
     private modalController: ModalController,
   ) { }
 
   ngOnInit() {
-    const foto = localStorage.getItem('foto');
-    if (foto) {
-      this.foto = 'data:image/jpeg;base64,' + foto;
-    }
-    else {
-      this.foto = '../../../assets/anon_img.png';
-    }
   }
 
   async abrirModal() {
