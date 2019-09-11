@@ -48,6 +48,7 @@
           CPF <ion-text color="danger">*</ion-text>
         </ion-label>
         <ion-input
+        [brmasker]="{mask:'000.000.000-00', len:14}"
         required
         type="text"
         formControlName="cpf"></ion-input>
