@@ -11,15 +11,24 @@ export class AlertService {
     private toastCtrl: ToastController
   ) { }
 
-  async toast(title: string, position) {
+  async toast(messages: Array<string>, position, cssClass: string) {
     return await this.toastCtrl.create({
-      message: title,
-      position, 
-      duration: 3000,
+      message: messages[0],
+      position,
+      cssClass,
+      duration: 1500,
       animated: true
     }).then(resultado => {
+      if(messages.length != 0) {
         resultado.present();
-      });
+        resultado.onDidDismiss().then(
+          () => {
+            messages.shift();
+            this.toast(messages, position, cssClass);
+          }
+        )
+      }
+    });
   }
 
   async alert_success() {

@@ -35,14 +35,14 @@ export class AuthService {
       .catch(response => {
         if(response.status === 400) {
           if(response.error.error === 'invalid_grant') {
-            return Promise.reject('Usuário ou senha inválida!');
+            return Promise.reject(['Usuário ou senha inválida!']);
           }
         }
         if(response.status === 0) {
-          return Promise.reject('O servidor está desconectado!')
+          return Promise.reject(['O servidor está desconectado!'])
         }
-        console.log(response)
-        return Promise.reject(response);
+        
+        return Promise.reject([response]);
       });
   }
 

@@ -1,3 +1,4 @@
+import { LoadingController } from '@ionic/angular';
 import { Contrato } from 'src/app/models/contrato';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -21,24 +22,37 @@ export class ProcurarContratoPage implements OnInit {
 
   constructor(
     private requestService: ApiRequestService,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private loadingController: LoadingController
   ) { }
 
   ngOnInit() {
 
     this.carregarFoto();
 
-    this.localizacaoAtual().then(
-      data => {
-        console.log(data.latitude + " " + data.longitude)
-        this.requestService.getRequest(`${environment.apiUrl}/contrato/proximos?latitude=${data.latitude}&longitude=${data.longitude}&range=500`
-      ).then(
-        t => {
-          this.contratos = t;
-          this.passarContrato();
-        }
-      );
-    });
+    const loading = this.loadingController.create({
+      message: 'Aguarde...',
+      spinner: 'crescent'
+    })
+    loading.then(
+      loadingData => {
+        loadingData.present();
+
+        this.localizacaoAtual().then(
+          data => {
+            this.requestService.getRequest(`${environment.apiUrl}/contrato/proximos?latitude=${data.latitude}&longitude=${data.longitude}&range=500`
+          ).then(
+            t => {
+              this.contratos = t;
+              this.passarContrato();
+            }
+          );
+        });
+
+        loadingData.dismiss();
+      }
+    )
+
 
   }
 

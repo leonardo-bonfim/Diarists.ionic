@@ -1,3 +1,4 @@
+import { LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -7,6 +8,7 @@ import { Usuario } from './../../models/usuario';
 import { ApiRequestService } from './../../services/api-request.service';
 import { environment } from 'src/environments/environment';
 import { AlertService } from 'src/app/services/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -23,7 +25,9 @@ export class CadastroPage implements OnInit {
     private imagemService: ImagemService,
     private formBuilder: FormBuilder,
     private requestService: ApiRequestService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private loadingController: LoadingController,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -50,15 +54,33 @@ export class CadastroPage implements OnInit {
     usuario.sexo = usuarioData.sexo;
     usuario.endereco = this.objectToEndereco(usuarioData);
 
-    console.log(usuario)
-    this.requestService.postRequest(`${environment.apiUrl}/usuario`, usuario)
-      .catch(
-        data => {
-          data.forEach(element => {
-            this.alertService.toast(element, 'top')
-          });
-        }
-      );
+    const loading = this.loadingController.create({
+      message: 'Aguarde...',
+      spinner: 'crescent'
+    })
+    loading.then(
+      async dataLoading => {
+        dataLoading.present();
+
+        await this.requestService.postRequest(`${environment.apiUrl}/usuario`, usuario)
+        .then(
+          () => {
+            this.alertService.toast(['Cadastrado com sucesso!'], 'bottom', 'alert-success');
+            this.router.navigate(['login']);
+          }
+        )
+        .catch(
+          data => {
+            if(data){
+                this.alertService.toast(data, 'bottom', 'alert-danger')
+            }
+          }
+        );
+
+        dataLoading.dismiss();
+      }
+    );
+    
   }
 
   private createForm() {

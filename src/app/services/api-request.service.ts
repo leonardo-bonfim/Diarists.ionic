@@ -13,10 +13,13 @@ export class ApiRequestService {
   async postRequest(url, body: any) {
     await this.http.post(url, body, this.addHeaders()).toPromise()
       .then(() => {
-        console.log('gravado');
+        return Promise.resolve();
       })
       .catch(data => {
-        return Promise.reject(data.error.errors);
+        if(data.error.errors) {
+          return Promise.reject(data.error.errors);
+        }
+        return Promise.reject(['O servidor está desconectado!']);
       });
   }
 

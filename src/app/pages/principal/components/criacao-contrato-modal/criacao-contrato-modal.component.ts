@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { ApiRequestService } from './../../../../services/api-request.service';
-import { ModalController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
-import { Contrato } from 'src/app/models/contrato';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ModalController, LoadingController } from '@ionic/angular';
+
+import { Contrato } from 'src/app/models/contrato';
+import { ApiRequestService } from './../../../../services/api-request.service';
 import { Endereco } from 'src/app/models/endereco';
 import { environment } from 'src/environments/environment';
+import { AlertService } from './../../../../services/alert.service';
 
 @Component({
   selector: 'app-criacao-contrato-modal',
@@ -23,7 +25,9 @@ export class CriacaoContratoModalComponent implements OnInit {
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private httpClient: HttpClient,
-    private requestService: ApiRequestService
+    private requestService: ApiRequestService,
+    private alertService: AlertService,
+    private loadingController: LoadingController,
   ) { }
 
   ngOnInit() {
@@ -53,10 +57,30 @@ export class CriacaoContratoModalComponent implements OnInit {
         console.log(contrato.latitude);
         console.log(contrato.longitude);
 
-        this.requestService.postRequest(`${environment.apiUrl}/contrato`, contrato).then(
-          () => this.fecharModal()
-        );
-        
+        const loading = this.loadingController.create({
+          message: 'Aguarde...',
+          spinner: 'crescent'
+        });
+        loading.then(
+          async dataLoading => {
+            dataLoading.present();
+
+            this.requestService.postRequest(`${environment.apiUrl}/contrato`, contrato)
+            .then(
+              () => {
+                this.alertService.toast(['Contrato criado!'], 'bottom', 'alert-success');
+                this.fecharModal();
+              }
+            )
+            .catch(
+              data => {
+                this.alertService.toast(data, 'bottom', 'alert-danger');
+              }
+            )
+
+            dataLoading.dismiss();
+          }
+        )
       }
     );
    
