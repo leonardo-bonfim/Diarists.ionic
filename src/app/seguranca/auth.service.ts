@@ -23,7 +23,7 @@ export class AuthService {
     
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic aW9uaWM6YWRtaW4='
+      'Authorization': 'Basic aW9uaWM6MTIzMzIx'
     });
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 

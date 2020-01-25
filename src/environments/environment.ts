@@ -9,7 +9,7 @@ export const environment = {
   tokenWhitelistedDomains: [ new RegExp('localhost:8080') ],
   tokenBlacklistedRoutes: [ new RegExp('\/oauth\/token') ],
 
-  apiUrl: 'http://192.168.0.10:8080' 
+  apiUrl: 'https://diarists-backend.herokuapp.com' 
 };
 
 /*
