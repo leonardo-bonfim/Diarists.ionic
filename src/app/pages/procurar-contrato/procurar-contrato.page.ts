@@ -1,10 +1,7 @@
 import { LoadingController } from '@ionic/angular';
-import { Contrato } from 'src/app/models/contrato';
-import { Component, OnInit, Input } from '@angular/core';
-
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { environment } from 'src/environments/environment';
-import { ApiRequestService } from './../../services/api-request.service';
+import { Component, OnInit } from '@angular/core';
+import { ContratoService } from 'src/app/services/contrato.service';
+import { LocalizacaoService } from 'src/app/services/localizacao.service';
 
 @Component({
   selector: 'app-procurar-contrato',
@@ -13,48 +10,39 @@ import { ApiRequestService } from './../../services/api-request.service';
 })
 export class ProcurarContratoPage implements OnInit {
 
-  contrato: any = {
-    descricao: '',
-    nome: ''
-  };
+  contrato: any = { descricao: '', nome: '' };
   contratos: any;
 
   constructor(
-    private requestService: ApiRequestService,
-    private geolocation: Geolocation,
-    private loadingController: LoadingController
+    private localizacao: LocalizacaoService,
+    private loadingController: LoadingController,
+    private contratoService: ContratoService
   ) { }
 
   ngOnInit() {
-
     const loading = this.loadingController.create({
       message: 'Aguarde...',
       spinner: 'crescent'
     })
-    loading.then(
-      loadingData => {
+    loading
+      .then(loadingData => {
         loadingData.present();
-
-        this.localizacaoAtual().then(
-          data => {
-            this.requestService.getRequest(`${environment.apiUrl}/contrato/proximos?latitude=${data.latitude}&longitude=${data.longitude}&range=500`
-          ).then(
-            t => {
-              this.contratos = t;
-              this.passarContrato();
-            }
-          );
-        });
-
+        this.localizacao.obterLocalizacaoAtual()
+          .then(location => {
+            this.contratoService.obterContratos(location.latitude, location.longitude, 500)
+              .then(contratos => {
+                this.contratos = contratos;
+                this.passarContrato();
+              }
+              );
+          });
         loadingData.dismiss();
       }
-    )
-
-
+      )
   }
 
   passarContrato() {
-    if(this.contratos.data.content.length > 0) {
+    if (this.contratos.data.content.length > 0) {
       this.contrato.descricao = this.contratos.data.content[0].descricao;
       this.contrato.nome = this.contratos.data.content[0].usuarios[0].nome;
       this.contratos.data.content.shift();
@@ -64,16 +52,4 @@ export class ProcurarContratoPage implements OnInit {
       this.contrato.nome = '';
     }
   }
-
-  private async localizacaoAtual() {
-    return await this.geolocation.getCurrentPosition().then(
-      data => {
-         return {
-          latitude: data.coords.latitude,
-          longitude: data.coords.longitude
-        }
-      }
-    );
-  }
-
 }
