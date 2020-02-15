@@ -19,7 +19,11 @@ const routes: Routes = [
       {
         path: 'procurar-contrato',
         loadChildren: '../pages/procurar-contrato/procurar-contrato.module#ProcurarContratoPageModule'
-      }
+      },
+      {
+        path: 'configuracao',
+        loadChildren: '../pages/configuracao/configuracao.module#ConfiguracaoPageModule'
+      },
     ]
   }
 ];

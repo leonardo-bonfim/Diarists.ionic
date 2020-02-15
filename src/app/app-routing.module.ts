@@ -7,8 +7,8 @@ const routes: Routes = [
   { path: 'cadastro', loadChildren: './pages/cadastro/cadastro.module#CadastroPageModule' },
   { path: 'principal', loadChildren: './pages/principal/principal.module#PrincipalPageModule' },
   { path: 'procurar-contrato', loadChildren: './pages/procurar-contrato/procurar-contrato.module#ProcurarContratoPageModule' },
+  { path: 'configuracao', loadChildren: './pages/configuracao/configuracao.module#ConfiguracaoPageModule' },
   { path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
-
 ];
 
 @NgModule({

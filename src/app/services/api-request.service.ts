@@ -10,7 +10,7 @@ export class ApiRequestService {
 
   constructor(private http: HttpClient) { }
 
-  async postRequest(url, body: any) {
+  async postRequest(url: string, body: any) {
     await this.http.post(url, body, this.addHeaders()).toPromise()
       .then(() => {
         return Promise.resolve();
@@ -23,11 +23,11 @@ export class ApiRequestService {
       });
   }
 
-  async getRequest(url, isString?: boolean) {
+  async getRequest(url: string, isString?: boolean) {
     return await this.http.get(url, this.addHeaders(isString)).toPromise();
   }
 
-  private addHeaders(isString?: boolean) {
+  private addHeaders(isString?: boolean): { headers: HttpHeaders } {
     var access_token = localStorage.getItem('token');
     let data = { headers: new HttpHeaders().set("Authorization", `Bearer ${access_token}`)};
 

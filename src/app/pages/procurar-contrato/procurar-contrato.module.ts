@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { ProcurarContratoPage } from './procurar-contrato.page';
 import { ComponentsModule } from './../../components/components.module';
+import { DescricaoCurtaPipe } from 'src/app/pipes/descricao-curta.pipe';
+import { DistanciaFormatadaPipe } from 'src/app/pipes/distancia-formatada.pipe';
 
 const routes: Routes = [
   {
@@ -24,7 +26,9 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    ProcurarContratoPage
+    ProcurarContratoPage,
+    DescricaoCurtaPipe,
+    DistanciaFormatadaPipe
   ]
 })
 export class ProcurarContratoPageModule {}
