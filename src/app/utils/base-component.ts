@@ -13,7 +13,7 @@ export abstract class BaseComponent {
         return new Promise<T>((resolve, reject) => {
             let loading = this.loadingController
                 .create({
-                    message: 'carregando...',
+                    message: 'Aguarde...',
                     spinner: 'crescent'
                 });
             loading.then(loadingData => {
