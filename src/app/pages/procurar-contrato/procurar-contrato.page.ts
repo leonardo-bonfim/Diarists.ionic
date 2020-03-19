@@ -12,20 +12,24 @@ import { Router } from '@angular/router';
 })
 export class ProcurarContratoPage extends BaseComponent implements OnInit {
 
-  contratos?: Array<ContratoProximo>;
+  contratos?: Array<{ id: number, contrato: ContratoProximo }> = [];
 
   constructor(
     private contratoService: ContratoService,
-    protected loadingController: LoadingController,
+    protected loadingController: LoadingController, 
     protected router: Router
-  ) {
+  ) { 
     super(loadingController, router);
   }
 
   ngOnInit() {
     this.carregar(this.contratoService.obterContratosProximos(1000))
       .then(async (contratos: ContratosProximo) => {
-        this.contratos = contratos.data.content;
+        this.contratos = contratos.data.content
+          .map((contrato: ContratoProximo, index: number) => { 
+            return { id: index, contrato: contrato }; 
+          });
+        this.contratoService.contratos = this.contratos;
       });
   }
 }

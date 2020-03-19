@@ -19,7 +19,7 @@ export class AuthService {
       console.log(this.jwtPayload);
     }
 
-  login(usuario: string, senha: string): Promise<void> {
+  async login(usuario: string, senha: string): Promise<void> {
     
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -27,23 +27,22 @@ export class AuthService {
     });
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post<any>(this.oauthTokenUrl, body, { headers })
-      .toPromise()
-      .then(response => {
-        this.armazenarToken(response.access_token);
-      })
-      .catch(response => {
-        if(response.status === 400) {
-          if(response.error.error === 'invalid_grant') {
-            return Promise.reject(['Usuário ou senha inválida!']);
-          }
+    try {
+      const response = await this.http.post<any>(this.oauthTokenUrl, body, { headers })
+        .toPromise();
+      this.armazenarToken(response.access_token);
+    }
+    catch (response_1) {
+      if (response_1.status === 400) {
+        if (response_1.error.error === 'invalid_grant') {
+          return Promise.reject(['Usuário ou senha inválida!']);
         }
-        if(response.status === 0) {
-          return Promise.reject(['O servidor está desconectado!'])
-        }
-        
-        return Promise.reject([response]);
-      });
+      }
+      if (response_1.status === 0) {
+        return Promise.reject(['O servidor está desconectado!']);
+      }
+      return Promise.reject([response_1]);
+    }
   }
 
   private armazenarToken(token: string) {

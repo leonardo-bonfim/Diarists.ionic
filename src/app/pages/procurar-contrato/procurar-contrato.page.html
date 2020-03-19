@@ -4,15 +4,15 @@
 
   <ion-list lines="inset">
 
-    <ion-item *ngFor="let contrato of contratos">
+    <ion-item *ngFor="let contrato of contratos" [routerLink]="['/detalhe', contrato.id]" >
       <ion-avatar slot="start">
         <img [src]="'/assets/anon_img.png'" />
       </ion-avatar>
       <ion-label>
-        <h2> {{ contrato?.descricao | descricaoCurta }} </h2>
+        <h2> {{ contrato?.contrato.descricao | descricaoCurta }} </h2>
         <h5 color="medium">
           <ion-icon name="map-outline"></ion-icon>
-          {{ contrato?.distancia | distanciaFormatada }}
+          {{ contrato?.contrato.distancia | distanciaFormatada }}
         </h5>
       </ion-label>
     </ion-item>

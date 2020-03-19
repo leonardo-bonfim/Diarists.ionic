@@ -1,5 +1,31 @@
 <app-header nomePagina="Configuração"></app-header>
 
+<ion-toolbar>
+    <ion-title>Configurações</ion-title>
+</ion-toolbar>
+
 <ion-content>
-  
+    
+    <ion-list>
+
+        <ion-item>
+            <ion-label>Nome:</ion-label>
+            <ion-input type="text" placeholder="Nome" [(ngModel)]="model.nome"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Sobrenome:</ion-label>
+            <ion-input type="text" placeholder="Sobrenome" [(ngModel)]="model.distancia" ></ion-input>
+        </ion-item>
+
+    </ion-list>
+
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-button (click)="salvar()" expand="block" fill="clear" shape="round" color="primary">
+            Salvar
+        </ion-button>
+    </ion-toolbar>
+</ion-footer>

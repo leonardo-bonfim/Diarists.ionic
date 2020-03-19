@@ -11,19 +11,15 @@ export abstract class BaseComponent {
 
     protected carregar<T>(promise: Promise<T>) {
         return new Promise<T>((resolve, reject) => {
-            let loading = this.loadingController
-                .create({
-                    message: 'Aguarde...',
-                    spinner: 'crescent'
-                });
+            let loading = this.loadingController.create({ message: 'Aguarde...', spinner: 'crescent' });
             loading.then(loadingData => {
                 loadingData.present();
                 promise
                     .then(async (resultado: T) => {
                         resolve(resultado);
                     })
-                    .catch(async (error: any) => {
-                        if (typeof (error) == typeof (HttpErrorResponse)) {
+                    .catch(async (error: HttpErrorResponse) => {
+                        if (error.status == 401) {
                             this.router.navigate(['/login']);
                         }
                         reject(error);

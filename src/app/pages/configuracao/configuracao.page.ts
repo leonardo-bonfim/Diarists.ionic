@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Formulario } from './formulario';
 
 @Component({
   selector: 'app-configuracao',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfiguracaoPage implements OnInit {
 
+  model: Formulario;
+
   constructor() { }
 
   ngOnInit() {
+    this.model = new Formulario();
+  }
+
+  salvar(){
+    console.log(this.model);
   }
 
 }
+

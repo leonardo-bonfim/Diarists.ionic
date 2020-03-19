@@ -30,7 +30,7 @@ export class CriacaoContratoModalComponent implements OnInit {
     this.createForm();
   }
 
-  fecharModal() {
+  cancelar() {
     this.modalController.dismiss();
   }
 
@@ -55,7 +55,7 @@ export class CriacaoContratoModalComponent implements OnInit {
             this.contratoService.criarContrato(contrato)
               .then(() => {
                 this.alertService.toast(['Contrato criado!'], 'bottom', 'alert-success');
-                this.fecharModal();
+                this.cancelar();
               })
               .catch(data => {
                 this.alertService.toast(data, 'bottom', 'alert-danger');

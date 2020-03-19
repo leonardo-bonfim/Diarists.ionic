@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiRequestService } from './api-request.service';
 import { environment } from 'src/environments/environment';
 import { Contrato } from '../models/contrato';
-import { ContratosProximo } from '../models/contratos-proximo';
+import { ContratosProximo, ContratoProximo } from '../models/contratos-proximo';
 import { LocalizacaoService } from './localizacao.service';
 
 @Injectable({
@@ -11,6 +11,8 @@ import { LocalizacaoService } from './localizacao.service';
 export class ContratoService {
 
   apiUrl: string = environment.apiUrl;
+
+  contratos: Array<{ id: number, contrato: ContratoProximo }>;
 
   constructor(
     private apiService: ApiRequestService,

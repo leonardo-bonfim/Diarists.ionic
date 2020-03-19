@@ -14,10 +14,9 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { SegurancaModule } from './seguranca/seguranca.module';
 import { ApiRequestService } from './services/api-request.service';
 import { AlertService } from './services/alert.service';
-import { AuthService } from './seguranca/auth.service';
+import { AuthService } from './services/auth.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -30,7 +29,6 @@ export function tokenGetter() {
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    SegurancaModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

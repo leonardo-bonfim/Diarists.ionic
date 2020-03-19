@@ -1,94 +1,92 @@
 <ion-header>
   <ion-toolbar>
-      <ion-title>Criar Contrato</ion-title>
+    <ion-title>Criar Contrato</ion-title>
   </ion-toolbar>
 </ion-header>
 
-  <ion-content fullscreen>
-    
-    <form [ngClass]="{'d-align-items-center': isEnderecoCadastro }" [formGroup]="contratoForm" (ngSubmit)="contratoSubmit(contratoForm.value)">
-      <ion-list>
-        <ion-item>
-            <ion-text text-center color="prmary">
-            <h1>
-                Aqui é onde você criar um contrato,
-                solicitando um serviço a ser feito
-            </h1>
-            </ion-text>
-        </ion-item>
-  
-        <ion-item>
-            <ion-textarea
-            placeholder="Descrição do Serviço"
-            formControlName="descricao"></ion-textarea>
-        </ion-item>
-  
-        <ion-radio-group formControlName="restricao">
-          <ion-list-header>
-              Restrição para serviço
-          </ion-list-header>
-            
-          <ion-item lines="none">
-              <ion-label class="label-placeholded">Nenhum</ion-label>
-              <ion-radio checked value="N"></ion-radio>
-          </ion-item>
-          <ion-item lines="none">
-              <ion-label class="label-placeholded">Masculino</ion-label>
-              <ion-radio value="M"></ion-radio>
-          </ion-item>
-          <ion-item lines="full">
-              <ion-label class="label-placeholded">Feminino</ion-label>
-              <ion-radio value="F"></ion-radio>
-          </ion-item>
-        </ion-radio-group>
-  
-        <ion-item>
-            <ion-label color="primary">Usar endereço de cadastro</ion-label>
-            <ion-checkbox checked (ionChange)="teste()"></ion-checkbox>
-        </ion-item>
-  
-        <div *ngIf="!isEnderecoCadastro">
-          <ion-list-header>
-              <ion-label color="primary">Endereço</ion-label>
-          </ion-list-header>
-          <ion-item>
+<ion-content fullscreen>
 
-            <ion-input formControlName="cep" type="text" placeholder="CEP"></ion-input>
-            <ion-input formControlName="logradouro" type="text" placeholder="Logradouro"></ion-input>
-            <ion-input formControlName="numero" type="text" placeholder="Número"></ion-input>
-            <ion-input formControlName="uf" type="text" placeholder="UF"></ion-input>
-            <ion-input formControlName="cidade" type="text" placeholder="Cidade"></ion-input>
-            <ion-input formControlName="bairro" type="text" placeholder="Bairro"></ion-input>
-            <ion-label color="primary" position="stacked">Complemento</ion-label>
-            <ion-textarea></ion-textarea>
-              
-          </ion-item>
-        </div>
-  
-        <ion-grid>    
-          <ion-row>
-        
-            <ion-col class="ion-justify-content-end" size="6">
-              <ion-button
-              expand="block"
-              shape="round"
-              (click)="fecharModal()">
-                  Cancelar
-              </ion-button>
-            </ion-col>
-        
-            <ion-col size="6">
-              <ion-button
-              type="submit"
-              expand="block"
-              shape="round">
-                  Criar
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-  
-      </ion-list>
-    </form>
-      <!-- </div> -->
-    </ion-content>
+  <form [formGroup]="contratoForm"
+    (ngSubmit)="contratoSubmit(contratoForm.value)">
+    <ion-list>
+      <ion-item>
+        <ion-text text-center color="prmary">
+          <h3>
+            Aqui é onde você criar um contrato,
+            solicitando um serviço a ser feito
+          </h3>
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea placeholder="Descrição do Serviço" formControlName="descricao"></ion-textarea>
+      </ion-item>
+
+      <ion-radio-group formControlName="restricao">
+        <ion-list-header>
+          Restrição para serviço
+        </ion-list-header>
+
+        <ion-item lines="none">
+          <ion-label class="label-placeholded">Nenhum</ion-label>
+          <ion-radio checked value="N"></ion-radio>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="label-placeholded">Masculino</ion-label>
+          <ion-radio value="M"></ion-radio>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label class="label-placeholded">Feminino</ion-label>
+          <ion-radio value="F"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+      <ion-item>
+        <!-- <ion-label color="primary">Usar endereço de cadastro</ion-label> -->
+        <ion-label color="primary">Usar meu endereço atual</ion-label>
+        <ion-checkbox checked (ionChange)="teste()"></ion-checkbox>
+      </ion-item>
+
+      <div *ngIf="!isEnderecoCadastro">
+        <ion-list-header>
+          <ion-label color="primary">Endereço</ion-label>
+        </ion-list-header>
+        <ion-item>
+
+          <ion-input formControlName="cep" type="text" placeholder="CEP"></ion-input>
+          <ion-input formControlName="logradouro" type="text" placeholder="Logradouro"></ion-input>
+          <ion-input formControlName="numero" type="text" placeholder="Número"></ion-input>
+          <ion-input formControlName="uf" type="text" placeholder="UF"></ion-input>
+          <ion-input formControlName="cidade" type="text" placeholder="Cidade"></ion-input>
+          <ion-input formControlName="bairro" type="text" placeholder="Bairro"></ion-input>
+          <ion-label color="primary" position="stacked">Complemento</ion-label>
+          <ion-textarea></ion-textarea>
+
+        </ion-item>
+      </div>
+
+      
+
+    </ion-list>
+  </form>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-justify-content-end" size="6">
+          <ion-button expand="block" shape="round" (click)="cancelar()">
+            Cancelar
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button type="submit" expand="block" shape="round">
+            Criar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

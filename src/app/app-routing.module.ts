@@ -8,7 +8,9 @@ const routes: Routes = [
   { path: 'principal', loadChildren: './pages/principal/principal.module#PrincipalPageModule' },
   { path: 'procurar-contrato', loadChildren: './pages/procurar-contrato/procurar-contrato.module#ProcurarContratoPageModule' },
   { path: 'configuracao', loadChildren: './pages/configuracao/configuracao.module#ConfiguracaoPageModule' },
+  { path: 'detalhe/:id', loadChildren: './pages/detalhe/detalhe.module#DetalhePageModule' },
   { path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
+
 ];
 
 @NgModule({

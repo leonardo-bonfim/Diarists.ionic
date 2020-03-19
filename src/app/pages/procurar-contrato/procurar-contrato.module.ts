@@ -11,10 +11,7 @@ import { DescricaoCurtaPipe } from 'src/app/pipes/descricao-curta.pipe';
 import { DistanciaFormatadaPipe } from 'src/app/pipes/distancia-formatada.pipe';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ProcurarContratoPage
-  }
+  { path: '', component: ProcurarContratoPage },
 ];
 
 @NgModule({
