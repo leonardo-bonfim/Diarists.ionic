@@ -1,4 +1,4 @@
 export class Formulario {
     nome: string;
-    distancia: number;
+    email: string;
 }

@@ -13,47 +13,40 @@
 
     <div class="div-dentro">
 
-      <ion-list lines="none" >
+      <ion-list lines="none">
         <ion-item>
           <ion-input type="text" placeholder="Email" #usuario></ion-input>
         </ion-item>
-    
+
         <ion-item>
           <ion-input type="password" placeholder="Senha" #senha></ion-input>
         </ion-item>
       </ion-list>
-    
+
       <ion-grid>
         <ion-row>
           <ion-col size="12">
-            <ion-button
-            color="secondary"
-            expand="block"
-            shape="round"
-            (click)="logar(usuario.value, senha.value)">
+            <ion-button color="secondary" expand="block" shape="round" (click)="logar(usuario.value, senha.value)">
               Entrar
             </ion-button>
           </ion-col>
         </ion-row>
-        
+
         <ion-row>
           <ion-col size="12">
-            <ion-button 
-            color="secondary"
-            fill="outline"
-            expand="block"
-            shape="round"
-            routerLink="/cadastro"
-            routerDirection="forward">
+            <ion-button color="secondary" fill="outline" expand="block" shape="round" routerLink="/cadastro"
+              routerDirection="forward">
               Cadastre-se
             </ion-button>
           </ion-col>
         </ion-row>
-    
+
         <ion-row>
           <ion-col size="12">
             <ion-item lines="none">
-              <ion-label color="primary" text-wrap>Ao acessar sua conta, você concorda com os Termos de Uso</ion-label>
+              <ion-label color="primary" text-wrap>
+                Ao acessar sua conta, você concorda com os Termos de Uso
+              </ion-label>
             </ion-item>
           </ion-col>
         </ion-row>

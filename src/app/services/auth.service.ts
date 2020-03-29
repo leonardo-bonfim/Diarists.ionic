@@ -2,6 +2,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Endereco } from '../models/endereco';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,46 +16,61 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    ) { 
-      this.carregarToken();
-      console.log(this.jwtPayload);
-    }
+  ) {
+    this.carregarToken();
+    console.log(this.jwtPayload);
+  }
 
   async login(usuario: string, senha: string): Promise<void> {
-    
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic aW9uaWM6MTIzMzIx'
+      Authorization: 'Basic aW9uaWM6MTIzMzIx'
     });
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
-
     try {
       const response = await this.http.post<any>(this.oauthTokenUrl, body, { headers })
         .toPromise();
-      this.armazenarToken(response.access_token);
-    }
-    catch (response_1) {
-      if (response_1.status === 400) {
-        if (response_1.error.error === 'invalid_grant') {
+      this.armazenarDados(response);
+      console.log(response);
+    } catch (error) {
+      if (error.status === 400) {
+        if (error.error.error === 'invalid_grant') {
           return Promise.reject(['Usuário ou senha inválida!']);
         }
       }
-      if (response_1.status === 0) {
+      if (error.status === 0) {
         return Promise.reject(['O servidor está desconectado!']);
       }
-      return Promise.reject([response_1]);
+      return Promise.reject([error]);
     }
   }
-
-  private armazenarToken(token: string) {
+  private armazenarDados(response: any): void {
+    localStorage.setItem('nome', response.nome);
+    this.jwtPayload = this.jwtHelperService.decodeToken(response.access_token);
+    localStorage.setItem('token', response.access_token);
+    localStorage.setItem('email', this.jwtPayload.user_name);
+    localStorage.setItem('endereco', JSON.stringify(response.endereco));
+  }
+  obterDadosDeUsuarioLogado(): {
+    nome: string,
+    token: string,
+    email: string,
+    endereco: Endereco
+  } {
+    return {
+      nome: localStorage.getItem('nome'),
+      token: localStorage.getItem('token'),
+      email: localStorage.getItem('email'),
+      endereco: JSON.parse(localStorage.getItem('endereco')) as Endereco
+    };
+  }
+  private armazenarToken(token: string): void {
     this.jwtPayload = this.jwtHelperService.decodeToken(token);
     localStorage.setItem('token', token);
   }
-
-  private carregarToken() {
+  private carregarToken(): void {
     const token = localStorage.getItem('token');
-
-    if(token) {
+    if (token) {
       this.armazenarToken(token);
     }
   }

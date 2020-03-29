@@ -32,7 +32,7 @@ export function tokenGetter() {
     HttpClientModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
+        tokenGetter,
         whitelistedDomains: environment.tokenWhitelistedDomains,
         blacklistedRoutes: environment.tokenBlacklistedRoutes
       }

@@ -1,5 +1,5 @@
 import { ApiRequestService } from './../../services/api-request.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { AlertService } from '../../services/alert.service';
@@ -12,10 +12,10 @@ import { BaseComponent } from 'src/app/utils/base-component';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage extends BaseComponent {
+export class LoginPage extends BaseComponent implements OnInit {
 
   constructor(
-    private auth: AuthService,
+    private authService: AuthService,
     private alertService: AlertService,
     private requestService: ApiRequestService,
     protected router: Router,
@@ -24,8 +24,12 @@ export class LoginPage extends BaseComponent {
     super(loadingController, router);
   }
 
+  ngOnInit(): void {
+    // console.clear();
+  }
+
   logar(usuario: string, senha: string) {
-    this.carregar(this.auth.login(usuario, senha))
+    this.carregar(this.authService.login(usuario, senha))
       .then(async () => {
         this.requestService.getRequest(`${environment.apiUrl}/usuario/foto?email=${usuario}`, true)
           .then(async photoData => {
