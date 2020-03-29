@@ -56,7 +56,7 @@
   
       <ion-item lines="full">
         <ion-label color="primary" position="stacked">Endereço</ion-label>
-        <ion-input formControlName="cep" type="text" placeholder="CEP" class="ion-margin-top"></ion-input>
+        <ion-input formControlName="cep" type="text" [brmasker]="{mask:'00000-00', len:9}" placeholder="CEP" class="ion-margin-top"></ion-input>
         <ion-input formControlName="logradouro" type="text" placeholder="Logradouro"></ion-input>
         <ion-input formControlName="numero" type="text" placeholder="Número"></ion-input>
         <ion-input formControlName="uf" type="text" placeholder="UF"></ion-input>

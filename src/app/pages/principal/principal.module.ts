@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { PrincipalPage } from './principal.page';
 import { CriacaoContratoModalComponent } from './components/criacao-contrato-modal/criacao-contrato-modal.component';
+import { BrMaskerModule } from 'br-mask';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    BrMaskerModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
