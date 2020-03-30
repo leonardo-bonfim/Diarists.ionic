@@ -33,7 +33,7 @@ export class LoginPage extends BaseComponent implements OnInit {
       .then(async () => {
         this.requestService.getRequest(`${environment.apiUrl}/usuario/foto?email=${usuario}`, true)
           .then(async photoData => {
-            localStorage.setItem('foto', photoData as string)
+            localStorage.setItem('foto', photoData as string);
             this.router.navigate(['tabs/principal']);
           });
       })

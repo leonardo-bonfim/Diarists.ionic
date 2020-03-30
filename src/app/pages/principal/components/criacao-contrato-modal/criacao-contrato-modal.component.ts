@@ -6,13 +6,16 @@ import { Component, OnInit } from '@angular/core';
 import { LocalizacaoService } from 'src/app/services/localizacao.service';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { BaseComponent } from 'src/app/utils/base-component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-criacao-contrato-modal',
   templateUrl: './criacao-contrato-modal.component.html',
   styleUrls: ['./criacao-contrato-modal.component.scss'],
 })
-export class CriacaoContratoModalComponent implements OnInit {
+export class CriacaoContratoModalComponent extends BaseComponent implements OnInit {
 
   isEnderecoCadastro = true;
   contratoForm: FormGroup;
@@ -21,10 +24,14 @@ export class CriacaoContratoModalComponent implements OnInit {
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private alertService: AlertService,
-    private loadingController: LoadingController,
     private position: LocalizacaoService,
-    private contratoService: ContratoService
-  ) { }
+    private contratoService: ContratoService,
+    private authService: AuthService,
+    protected loadingController: LoadingController,
+    protected router: Router
+  ) {
+    super(loadingController, router);
+  }
 
   ngOnInit() {
     this.createForm();
@@ -39,12 +46,12 @@ export class CriacaoContratoModalComponent implements OnInit {
   }
 
   async contratoSubmit(contratoData: any): Promise<void> {
-    let loading = this.loadingController.create({ message: 'Aguarde...', spinner: 'crescent' });
-    loading.then(async dataLoading => {
-      dataLoading.present();
-      let promise = this.isEnderecoCadastro ? this.position.obterLocalizacaoAtual() : this.position.obterLocalizacaoPorCep(contratoData.cep);
-      promise.then(localizacao => {
-        let contrato = new Contrato();
+    const promise = this.isEnderecoCadastro ?
+      this.position.obterLocalizacaoPorCep(this.authService.obterDadosDeUsuarioLogado().endereco.cep) :
+      this.position.obterLocalizacaoPorCep(contratoData.cep);
+    this.carregar(promise)
+      .then(async (localizacao: { latitude: number, longitude: number }) => {
+        const contrato = new Contrato();
         contrato.descricao = contratoData.descricao;
         contrato.restricao = contratoData.restricao;
         contrato.latitude = String(localizacao.latitude);
@@ -60,13 +67,8 @@ export class CriacaoContratoModalComponent implements OnInit {
               .catch(data => {
                 this.alertService.toast(data, 'bottom', 'alert-danger');
               });
-            dataLoading.dismiss();
-          }
-          );
+          });
       });
-    });
-
-
   }
 
   private createForm(): void {
@@ -81,13 +83,12 @@ export class CriacaoContratoModalComponent implements OnInit {
       bairro: [null, Validators.required]
     });
   }
-
   private async objectToEndereco(contratoData: any): Promise<Endereco> {
     if (this.isEnderecoCadastro) {
-      return await this.position.obterEnderecoAtual()
+      return await this.position.obterEnderecoAtual();
     } else {
       return new Promise<Endereco>(resolve => {
-        let endereco = new Endereco();
+        const endereco = new Endereco();
         endereco.cep = contratoData.cep;
         endereco.uf = contratoData.uf;
         endereco.bairro = contratoData.bairro;
