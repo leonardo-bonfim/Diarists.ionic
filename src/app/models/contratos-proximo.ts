@@ -39,4 +39,5 @@ export class UsuarioMinimo {
     sobrenome: string;
     sexo: string;
     endereco: Endereco;
+    foto: string;
 }

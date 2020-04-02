@@ -11,34 +11,57 @@ import { LocalizacaoService } from './localizacao.service';
 export class ContratoService {
 
   apiUrl: string = environment.apiUrl;
-
-  contratos: Array<{ id: number, contrato: ContratoProximo }>;
+  distancia = 1000;
 
   constructor(
     private apiService: ApiRequestService,
-    private localizacaoService: LocalizacaoService
-  ) { }
+    private localizacaoService: LocalizacaoService) { }
 
   async obterContratos(latitude: number, longitude: number, range: number): Promise<ContratosProximo> {
-    let url = `${this.apiUrl}/contrato/proximos?latitude=${latitude}&longitude=${longitude}&range=${range}`;
+    const url = `${this.apiUrl}/contrato/proximos?latitude=${latitude}&longitude=${longitude}&range=${range}`;
     return await this.apiService.getRequest(url)
       .then(async (resultado: ContratosProximo) => {
         return resultado;
       });
   }
 
-  async obterContratosProximos(distancia: number): Promise<ContratosProximo> {
-    return await this.localizacaoService.obterLocalizacaoAtual()
-      .then(async (localizacao: any) => {
-        return await this.obterContratos(localizacao.latitude, localizacao.longitude, distancia)
-          .then(async (contratos: ContratosProximo) => {
-            return contratos;
-          });
-      });
+  async obterContratoProximoPeloId(id: number): Promise<{ id: number, contrato: ContratoProximo }> {
+    return await new Promise(async (resolve, reject) => {
+      await this.obterContratosProximos()
+        .then(async (resultado) => {
+          const contrato = resultado.find(c => c.id === id);
+          resolve(contrato);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  async obterContratosProximos(): Promise<Array<{ id: number, contrato: ContratoProximo }>> {
+    return new Promise(async (resolve, reject) => {
+      await this.localizacaoService.obterLocalizacaoAtual()
+        .then(async (localizacao: any) => {
+          await this.obterContratos(localizacao.latitude, localizacao.longitude, this.distancia)
+            .then(async (contratos: ContratosProximo) => {
+              const mapeado = contratos.data.content.map((contrato: ContratoProximo, id: number) => {
+                return { id, contrato };
+              });
+              resolve(mapeado);
+            })
+            .catch(error => {
+              reject(error);
+            });
+        })
+        .catch(async (error) => {
+          reject(error);
+        });
+
+    });
   }
 
   async criarContrato(contrato: Contrato) {
-    let url = `${environment.apiUrl}/contrato`;
+    const url = `${environment.apiUrl}/contrato`;
     return await this.apiService.postRequest(url, contrato);
   }
 

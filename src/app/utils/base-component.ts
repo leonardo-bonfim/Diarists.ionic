@@ -1,5 +1,4 @@
 import { LoadingController } from '@ionic/angular';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 export abstract class BaseComponent {
@@ -9,25 +8,28 @@ export abstract class BaseComponent {
         protected router: Router
     ) { }
 
-    protected carregar<T>(promise: Promise<T>) {
-        return new Promise<T>((resolve, reject) => {
-            let loading = this.loadingController.create({ message: 'Aguarde...', spinner: 'crescent' });
-            loading.then(loadingData => {
-                loadingData.present();
-                promise
-                    .then(async (resultado: T) => {
-                        resolve(resultado);
-                    })
-                    .catch(async (error: HttpErrorResponse) => {
-                        if (error.status == 401) {
-                            this.router.navigate(['/login']);
-                        }
-                        reject(error);
-                    })
-                    .finally(() => {
-                        loadingData.dismiss();
+    protected async carregar<T>(promise: Promise<T>): Promise<T> | null {
+        return await new Promise<T>((resolve, reject) => {
+            try {
+                this.loadingController
+                    .create({ message: 'Aguarde...', spinner: 'crescent' })
+                    .then(async (loadingData: HTMLIonLoadingElement) => {
+                        loadingData.present();
+                        promise
+                            .then(async (resultado: T) => {
+                                resolve(resultado);
+                            })
+                            .finally(() => {
+                                loadingData.dismiss();
+                            });
                     });
-            });
+            } catch (error) {
+                console.log('passou aqui');
+                if (error.status === 401 || error.status === '401') {
+                    this.router.navigate(['/login']);
+                }
+                reject(null);
+            }
         });
     }
 }

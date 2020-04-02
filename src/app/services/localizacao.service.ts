@@ -9,7 +9,7 @@ import { Endereco } from '../models/endereco';
 })
 export class LocalizacaoService {
 
-  urlGoogleGeoCode: string = 'https://maps.googleapis.com/maps/api/geocode/json?';
+  urlGoogleGeoCode = 'https://maps.googleapis.com/maps/api/geocode/json?';
   googleKey = environment.googleApiKey;
 
   constructor(
@@ -19,10 +19,10 @@ export class LocalizacaoService {
 
   async obterEnderecoAtual(): Promise<Endereco> {
     return this.obterLocalizacaoAtual().then(gps => {
-      let url: string = `${this.urlGoogleGeoCode}latlng=${gps.latitude},${gps.longitude}&key=${this.googleKey}`;
+      const url = `${this.urlGoogleGeoCode}latlng=${gps.latitude},${gps.longitude}&key=${this.googleKey}`;
       return this.http.get(url).toPromise()
-        .then(async (location: {results: Array<{address_components: Array<{long_name: string, short_name: string}>}>}) => {
-          let endereco = new Endereco();
+        .then(async (location: { results: Array<{ address_components: Array<{ long_name: string, short_name: string }> }> }) => {
+          const endereco = new Endereco();
           endereco.numero = location.results[0].address_components[0].long_name;
           endereco.logradouro = location.results[0].address_components[1].long_name;
           endereco.bairro = location.results[0].address_components[2].long_name;
@@ -45,7 +45,7 @@ export class LocalizacaoService {
   }
 
   async obterLocalizacaoPorCep(cep: string): Promise<{ latitude: number, longitude: number }> {
-    let url = `${this.urlGoogleGeoCode}address=${cep}&key=${this.googleKey}`;
+    const url = `${this.urlGoogleGeoCode}address=${cep}&key=${this.googleKey}`;
     return this.http.get(url).toPromise()
       .then(async resultado => {
         return {
