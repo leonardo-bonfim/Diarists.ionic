@@ -17,6 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ApiRequestService } from './services/api-request.service';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
+import { AgmCoreModule } from '@agm/core';
+
 
 export function tokenGetter() {
   return localStorage.getItem('token');

@@ -54,4 +54,12 @@ export class LocalizacaoService {
         }
       });
   }
+
+  obterEnderecoString(endereco: Endereco) {
+    return `${endereco.logradouro}\
+      ${endereco.numero ? `, ${endereco.numero}` : ''}\
+      ${endereco.bairro ? ` - ${endereco.bairro}` : ''}\
+      ${endereco.cidade ? ` - ${endereco.cidade}` : ''}\
+      ${endereco.uf ? ` - ${endereco.uf}` : ''}`;
+  }
 }

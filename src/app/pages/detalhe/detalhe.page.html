@@ -35,6 +35,19 @@
       </ion-row>
     </ion-grid>
   </ion-card>
+
+  <ion-card *ngIf="carregado">
+    <agm-map [latitude]="latitude" [zoom]="zoom" [longitude]="longitude">
+      <agm-marker  [latitude]="latitude" [longitude]="longitude">
+      </agm-marker>
+    </agm-map>
+    <div class="ion-text-right">
+      <ion-label class="ion-text-right">
+        {{ endereco }}
+      </ion-label>
+    </div>
+  </ion-card>
+
 </ion-content>
 
 <ion-footer>

@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { DetalhePage } from './detalhe.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { MyPipesModule } from 'src/app/pipes/my-pipes.module';
+import { AgmCoreModule } from '@agm/core';
 
 const routes: Routes = [
   {
@@ -23,7 +24,10 @@ const routes: Routes = [
     IonicModule,
     ComponentsModule,
     RouterModule.forChild(routes),
-    MyPipesModule
+    MyPipesModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBR1bJW8zHDDIEbihZ_dqdjtTIBvAI5Ey0'
+    })
   ],
   declarations: [DetalhePage]
 })
