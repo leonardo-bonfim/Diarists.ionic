@@ -6,7 +6,7 @@
 
     <ion-item *ngFor="let contrato of contratos" [routerLink]="['/detalhe', contrato.id]" >
       <ion-avatar slot="start">
-        <img [src]="'/assets/anon_img.png'" />
+        <img [src]="contrato.contrato.usuarios[0].foto ? contrato.contrato.usuarios[0].foto : '/assets/anon_img.png'" />
       </ion-avatar>
       <ion-label>
         <h2> {{ contrato?.contrato.descricao | descricaoCurta }} </h2>
