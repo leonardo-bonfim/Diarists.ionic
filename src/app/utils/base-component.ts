@@ -8,7 +8,7 @@ export abstract class BaseComponent {
         protected router: Router
     ) { }
 
-    protected async carregar<T>(promise: Promise<T>): Promise<T> | null {
+    protected async carregar<T>(promise: Promise<T>) {
         return await new Promise<T>((resolve, reject) => {
             try {
                 this.loadingController
