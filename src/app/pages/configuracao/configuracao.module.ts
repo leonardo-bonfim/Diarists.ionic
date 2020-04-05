@@ -7,12 +7,11 @@ import { IonicModule } from '@ionic/angular';
 
 import { ConfiguracaoPage } from './configuracao.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ConfiguracaoPage
-  }
+  { path: '', component: ConfiguracaoPage },
+  { path: 'usuario', component: UsuarioComponent }
 ];
 
 @NgModule({
@@ -23,6 +22,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ComponentsModule
   ],
-  declarations: [ConfiguracaoPage]
+  declarations: [ConfiguracaoPage, UsuarioComponent]
 })
 export class ConfiguracaoPageModule {}

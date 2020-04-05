@@ -1,31 +1,55 @@
 <app-header nomePagina="Configuração"></app-header>
 
-<ion-toolbar>
+<!-- <ion-toolbar>
     <ion-title>Configurações</ion-title>
-</ion-toolbar>
+</ion-toolbar> -->
 
 <ion-content>
+
+    <ion-card class="ion-padding" [routerLink]="['/tabs/configuracao/usuario']">
+        <div class="ion-float-left">
+            <ion-label>
+                <h2> 
+                    <ion-icon name="person-outline"></ion-icon> 
+                    &nbsp;
+                    Meus Dados 
+                </h2>
+            </ion-label>
+        </div>
+        <div class="ion-float-right">
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </div>
+    </ion-card>
     
-    <ion-list>
+    <ion-card class="ion-padding">
+        <div class="ion-float-left">
+            <ion-label>
+                <h2> 
+                    <ion-icon name="search-outline"></ion-icon>
+                    &nbsp;
+                    Preferências de busca 
+                </h2>
+            </ion-label>
+        </div>
+        <div class="ion-float-right">
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </div>
+    </ion-card>
+    
+    <ion-card class="ion-padding">
+        <div class="ion-float-left">
+            <ion-label>
+                <h2> 
+                    <ion-icon name="help-outline"></ion-icon>
+                    &nbsp;
+                    Ajuda e Suporte 
+                </h2>
+            </ion-label>
+        </div>
+        <div class="ion-float-right">
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </div>
+    </ion-card>
 
-        <ion-item>
-            <ion-label>Nome:</ion-label>
-            <ion-input type="text" placeholder="Nome" [(ngModel)]="model.nome"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label>Email:</ion-label>
-            <ion-input type="text" placeholder="Email" [(ngModel)]="model.email" ></ion-input>
-        </ion-item>
-
-    </ion-list>
 
 </ion-content>
-
-<ion-footer>
-    <ion-toolbar>
-        <ion-button (click)="salvar()" expand="block" fill="clear" shape="round" color="primary">
-            Salvar
-        </ion-button>
-    </ion-toolbar>
-</ion-footer>

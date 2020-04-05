@@ -1,0 +1,35 @@
+<app-header nomePagina="Meus Dados"></app-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item>
+    <ion-label color="medium">Nome:</ion-label>
+    <ion-input type="text" placeholder="Nome" [(ngModel)]="form.nome" name="nome" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="medium">Email:</ion-label>
+    <ion-input type="email" placeholder="Email" [(ngModel)]="form.email" name="email" required></ion-input>
+  </ion-item>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-justify-content-end" size="6">
+          <ion-button expand="block" shape="round" [routerLink]="['/tabs/configuracao']">
+            cancelar
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button type="submit" expand="block" shape="round" (click)="salvar()">
+            salvar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

@@ -18,7 +18,7 @@ export class AuthService {
     private http: HttpClient,
   ) {
     this.carregarToken();
-    console.log(this.jwtPayload);
+    // console.log(this.jwtPayload);
   }
 
   async login(usuario: string, senha: string): Promise<void> {
