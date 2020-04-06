@@ -5,5 +5,5 @@ export const environment = {
   tokenWhitelistedDomains: [ new RegExp('192.168.0.10:8080') ],
   tokenBlacklistedRoutes: [ new RegExp('\/oauth\/token') ],
 
-  apiUrl: 'https://diarists-backend.herokuapp.com' 
+  apiUrl: 'https://diarists-backend.herokuapp.com'
 };

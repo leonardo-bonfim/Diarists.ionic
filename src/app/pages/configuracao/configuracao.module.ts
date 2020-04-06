@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { ConfiguracaoPage } from './configuracao.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { BrMaskerModule } from 'br-mask';
 
 const routes: Routes = [
   { path: '', component: ConfiguracaoPage },
@@ -20,7 +21,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ComponentsModule
+    ComponentsModule,
+    BrMaskerModule
   ],
   declarations: [ConfiguracaoPage, UsuarioComponent]
 })

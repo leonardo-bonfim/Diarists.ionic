@@ -2,15 +2,62 @@
 
 <ion-content class="ion-padding">
 
-  <ion-item>
-    <ion-label color="medium">Nome:</ion-label>
-    <ion-input type="text" placeholder="Nome" [(ngModel)]="form.nome" name="nome" required></ion-input>
-  </ion-item>
+  <form #usuarioForm="ngForm" novalidate>
+    <ion-item>
+      <ion-label color="medium">Nome:</ion-label>
+      <ion-input type="text" placeholder="Nome" [(ngModel)]="dadosEmTela.nome" name="nome" required></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label color="medium">Email:</ion-label>
-    <ion-input type="email" placeholder="Email" [(ngModel)]="form.email" name="email" required></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label color="medium">Email:</ion-label>
+      <ion-input type="email" placeholder="Email" [(ngModel)]="dadosEmTela.email" name="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="medium">Cep:</ion-label>
+      <ion-input type="text" placeholder="Cep" [(ngModel)]="dadosEmTela.endereco.cep" name="cep"
+        [brmasker]="{mask:'00000-00', len:9}" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="medium">Logradouro:</ion-label>
+      <ion-input type="text" placeholder="Logradouro" [(ngModel)]="dadosEmTela.endereco.logradouro" name="logradouro"
+        required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="medium">Número:</ion-label>
+      <ion-input type="text" placeholder="Número" [(ngModel)]="dadosEmTela.endereco.numero" name="numero" required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="medium">Complemento:</ion-label>
+      <ion-input type="text" placeholder="Complemento" [(ngModel)]="dadosEmTela.endereco.complemento"
+        name="complemento">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="medium">Bairro:</ion-label>
+      <ion-input type="text" placeholder="Bairro" [(ngModel)]="dadosEmTela.endereco.bairro" name="bairro" required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="medium">Cidade:</ion-label>
+      <ion-input type="text" placeholder="Cidade" [(ngModel)]="dadosEmTela.endereco.cidade" name="cidade" required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="medium">UF:</ion-label>
+      <ion-input type="text" placeholder="UF" [(ngModel)]="dadosEmTela.endereco.uf" name="uf" required>
+      </ion-input>
+    </ion-item>
+
+  </form>
 
 </ion-content>
 
@@ -25,7 +72,8 @@
           </ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button type="submit" expand="block" shape="round" (click)="salvar()">
+          <ion-button type="submit" expand="block" shape="round" (click)="salvar()"
+            [disabled]="usuarioForm.invalid || !foiAlterado()">
             salvar
           </ion-button>
         </ion-col>

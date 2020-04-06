@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-
-// import { HTTP } from '@ionic-native/http/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +13,19 @@ export class ApiRequestService {
     await this.http.post(url, body, this.addHeaders()).toPromise()
       .then(() => {
         return Promise.resolve();
+      })
+      .catch(data => {
+        if (data.error.errors) {
+          return Promise.reject(data.error.errors);
+        }
+        return Promise.reject(['O servidor está desconectado!']);
+      });
+  }
+
+  async putRequest(url: string, body: any) {
+    await this.http.put(url, body, this.addHeaders()).toPromise()
+      .then(async (result) => {
+        return Promise.resolve(result);
       })
       .catch(data => {
         if (data.error.errors) {
