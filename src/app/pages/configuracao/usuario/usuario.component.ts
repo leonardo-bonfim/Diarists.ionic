@@ -40,8 +40,10 @@ export class UsuarioComponent extends BaseComponent implements OnInit {
 
   salvar() {
     const body = new Object();
-    if (this.dadosEmTela.nome !== this.dadosOriginais.nome) { body.nome = this.dadosEmTela.nome; }
-    if (this.dadosEmTela.email !== this.dadosOriginais.email) { body.email = this.dadosEmTela.email; }
+    // tslint:disable-next-line: no-string-literal
+    if (this.dadosEmTela.nome !== this.dadosOriginais.nome) { body['nome'] = this.dadosEmTela.nome; }
+    // tslint:disable-next-line: no-string-literal
+    if (this.dadosEmTela.email !== this.dadosOriginais.email) { body['email'] = this.dadosEmTela.email; }
     for (const prop in this.dadosEmTela.endereco) {
       if (this.dadosEmTela.endereco[prop] !== this.dadosOriginais.endereco[prop]) {
         body[prop] = this.dadosEmTela.endereco[prop];

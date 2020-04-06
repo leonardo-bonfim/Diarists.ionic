@@ -9,9 +9,10 @@ import { ConfiguracaoPage } from './configuracao.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { BrMaskerModule } from 'br-mask';
+import { AuthorizationGuard } from 'src/app/guards/authorization.guard';
 
 const routes: Routes = [
-  { path: '', component: ConfiguracaoPage },
+  { path: '', component: ConfiguracaoPage, canActivate: [AuthorizationGuard]},
   { path: 'usuario', component: UsuarioComponent }
 ];
 

@@ -9,12 +9,10 @@ import { IonicModule } from '@ionic/angular';
 import { PrincipalPage } from './principal.page';
 import { CriacaoContratoModalComponent } from './components/criacao-contrato-modal/criacao-contrato-modal.component';
 import { BrMaskerModule } from 'br-mask';
+import { AuthorizationGuard } from 'src/app/guards/authorization.guard';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: PrincipalPage
-  }
+  { path: '', component: PrincipalPage, canActivate: [AuthorizationGuard]}
 ];
 
 @NgModule({
