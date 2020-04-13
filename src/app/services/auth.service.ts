@@ -75,4 +75,11 @@ export class AuthService {
     }
   }
 
+  seEstaLogado(): boolean {
+    const token = localStorage.getItem('token');
+    const decodedToken = this.jwtHelperService.decodeToken(token);
+    const expirationDate = new Date(decodedToken.exp * 1000);
+    return new Date() < expirationDate;
+  }
+
 }

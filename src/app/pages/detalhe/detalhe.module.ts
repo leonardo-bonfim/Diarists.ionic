@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { DetalhePage } from './detalhe.page';
 import { ComponentsModule } from 'src/app/components/components.module';
-import { MyPipesModule } from 'src/app/pipes/my-pipes.module';
+import { MyPipesModule } from 'src/app/shared/my-pipes.module';
 import { AgmCoreModule } from '@agm/core';
 import { AuthorizationGuard } from 'src/app/guards/authorization.guard';
 

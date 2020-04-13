@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthorizationGuard } from './guards/authorization.guard';
+import { LastPageGuard } from './guards/last-page.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full', canActivate: [AuthorizationGuard]},
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule'},
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule', canLoad: [LastPageGuard]},
   { path: 'cadastro', loadChildren: './pages/cadastro/cadastro.module#CadastroPageModule'},
   { path: 'principal', loadChildren: './pages/principal/principal.module#PrincipalPageModule'},
   { path: 'procurar-contrato', loadChildren: './pages/procurar-contrato/procurar-contrato.module#ProcurarContratoPageModule'},

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ProcurarContratoPage } from './procurar-contrato.page';
 import { ComponentsModule } from './../../components/components.module';
-import { MyPipesModule } from 'src/app/pipes/my-pipes.module';
+import { MyPipesModule } from 'src/app/shared/my-pipes.module';
 import { AuthorizationGuard } from 'src/app/guards/authorization.guard';
 
 const routes: Routes = [
