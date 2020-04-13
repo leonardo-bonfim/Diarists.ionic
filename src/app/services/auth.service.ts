@@ -51,12 +51,7 @@ export class AuthService {
     localStorage.setItem('email', this.jwtPayload.user_name);
     localStorage.setItem('endereco', JSON.stringify(response.endereco));
   }
-  obterDadosDeUsuarioLogado(): {
-    nome: string,
-    token: string,
-    email: string,
-    endereco: Endereco
-  } {
+  obterDadosDeUsuarioLogado(): { nome: string, token: string, email: string, endereco: Endereco } {
     return {
       nome: localStorage.getItem('nome'),
       token: localStorage.getItem('token'),
@@ -76,10 +71,18 @@ export class AuthService {
   }
 
   seEstaLogado(): boolean {
-    const token = localStorage.getItem('token');
-    const decodedToken = this.jwtHelperService.decodeToken(token);
-    const expirationDate = new Date(decodedToken.exp * 1000);
-    return new Date() < expirationDate;
+    try {
+      const token = localStorage.getItem('token');
+      const decodedToken = this.jwtHelperService.decodeToken(token);
+      const expirationDate = new Date(decodedToken.exp * 1000);
+      return new Date() < expirationDate;
+    } catch {
+      return false;
+    }
+  }
+
+  deslogarUsuario(): void {
+    localStorage.setItem('token', '');
   }
 
 }

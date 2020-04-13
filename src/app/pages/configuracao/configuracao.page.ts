@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-configuracao',
@@ -8,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 export class ConfiguracaoPage implements OnInit {
 
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  deslogar(): void {
+    this.authService.deslogarUsuario();
+    this.router.navigate(['/login']);
   }
 
 }
