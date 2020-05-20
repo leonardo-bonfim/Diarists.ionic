@@ -5,6 +5,8 @@ import { ContratoProximo } from 'src/app/models/contratos-proximo';
 import { BaseComponent } from 'src/app/utils/base-component';
 import { LoadingController } from '@ionic/angular';
 import { LocalizacaoService } from 'src/app/services/localizacao.service';
+import { ApiResponse } from 'src/app/models/response';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-detalhe',
@@ -19,12 +21,14 @@ export class DetalhePage extends BaseComponent implements OnInit {
   endereco: string;
   zoom: number;
   carregado = false;
+  jaAceito = false;
 
   constructor(
     protected loadingController: LoadingController,
     protected router: Router,
-    private contratoService: ContratoService,
     private localizacaoService: LocalizacaoService,
+    private contratoService: ContratoService,
+    private alertService: AlertService,
     private route: ActivatedRoute,
   ) {
     super(loadingController, router);
@@ -34,10 +38,11 @@ export class DetalhePage extends BaseComponent implements OnInit {
     console.clear();
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.carregar(this.contratoService.obterContratoProximoPeloId(id))
-      .then(async (resultado) => {
-        const endereco = resultado.contrato.usuarios[0].endereco;
-        const cep = resultado.contrato.usuarios[0].endereco.cep;
-        this.contrato = resultado.contrato;
+      .then(async (resultado: ApiResponse<ContratoProximo>) => {
+        this.jaAceito = this.contratoService.seJaAceito(resultado.data);
+        const endereco = resultado.data.usuarios[0].endereco;
+        const cep = resultado.data.usuarios[0].endereco.cep;
+        this.contrato = resultado.data;
         this.endereco = this.localizacaoService.obterEnderecoString(endereco);
         this.localizacaoService.obterLocalizacaoPorCep(cep)
           .then(async (location) => {
@@ -59,6 +64,15 @@ export class DetalhePage extends BaseComponent implements OnInit {
   }
 
   aceitarContrato() {
+    this.carregar(this.contratoService.aceitarContrato(this.contrato))
+      .then(async (aceito) => {
+        if (aceito) {
+          this.alertService.toast(['Contrato aceito!'], 'bottom', 'alert-success');
+          this.jaAceito = true;
+        } else {
+          this.alertService.toast(['Ocorreu um erro.'], 'bottom', 'alert-danger');
+        }
+      });
   }
 
 }

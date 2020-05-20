@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Endereco } from '../models/endereco';
+import { Usuario } from '../models/usuario';
+import { UsuarioMinimo } from '../models/contratos-proximo';
 
 
 @Injectable({
@@ -59,10 +61,22 @@ export class AuthService {
       endereco: JSON.parse(localStorage.getItem('endereco')) as Endereco
     };
   }
+
+  obterMeuUsuario(): Promise<UsuarioMinimo> {
+    return new Promise<UsuarioMinimo>((resolve) => {
+      const dados = this.obterDadosDeUsuarioLogado();
+      const usuario = new UsuarioMinimo();
+      usuario.nome = dados.nome;
+      usuario.endereco = dados.endereco;
+      resolve(usuario);
+    });
+  }
+
   private armazenarToken(token: string): void {
     this.jwtPayload = this.jwtHelperService.decodeToken(token);
     localStorage.setItem('token', token);
   }
+
   private carregarToken(): void {
     const token = localStorage.getItem('token');
     if (token) {

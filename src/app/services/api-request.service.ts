@@ -48,13 +48,11 @@ export class ApiRequestService {
   }
 
   private addHeaders(isString?: boolean): { headers: HttpHeaders } {
-    var access_token = localStorage.getItem('token');
-    let data = { headers: new HttpHeaders().set("Authorization", `Bearer ${access_token}`) };
-
+    const accessToken = localStorage.getItem('token');
+    const data = { headers: new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) };
     if (isString) {
-      Object.assign(data, { responseType: 'text' as 'json' })
+      Object.assign(data, { responseType: 'text' as 'json' });
     }
-
     return data;
   }
 

@@ -21,8 +21,9 @@ export class Data {
 
 export class ContratoProximo {
     descricao: string;
-    usuarios: UsuarioMinimo[];
     distancia: number;
+    id: number;
+    usuarios: UsuarioMinimo[];
 }
 
 export class Pageable {
